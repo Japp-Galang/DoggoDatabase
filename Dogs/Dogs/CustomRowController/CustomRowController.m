@@ -12,7 +12,8 @@
 #import "ViewUpdateController.h"
 #import "ViewImagesController.h"
 
-@interface CustomRowController ()
+
+@interface CustomRowController () <PreviousViewDelegate>
 
 @property (strong, nonatomic) IBOutlet UITextField *changeValueField;
 @property (strong, nonatomic) NSString* updatedValue;
@@ -20,6 +21,9 @@
 @property (strong, nonatomic) UIButton* updateButton;
 @property (strong, nonatomic) NSString* currentlyUpdatingColumn;
 @property (nonatomic) bool updatingColumnIsString;
+
+@property (nonatomic, strong) ViewUpdateController *previousView;
+
 @end
 
 @implementation CustomRowController
@@ -29,6 +33,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+  
     
     CGFloat alignmentConstant = self.view.frame.size.width / 20;
     
@@ -192,6 +197,9 @@
 - (void)viewDidDisappear:(BOOL)animated
 {
     [super viewDidDisappear:YES];
+    ViewUpdateController *viewUpdateController = [[ViewUpdateController alloc] init];
+    
+    
    
 }
 
@@ -199,10 +207,9 @@
 {
     
     DatabaseController *dbController = [DatabaseController sharedInstance];
-    
     [dbController deleteRowFromTable:[NSString stringWithFormat:@"%@", self.ident] table:@"Dog"];
-    
     [self dismissViewControllerAnimated:YES completion:nil];
+    
     
 }
 
@@ -284,7 +291,6 @@
     [self dismissViewControllerAnimated:YES completion:nil];
     
 }
-
 
 
 

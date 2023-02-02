@@ -120,13 +120,13 @@
 				DDF6CB0529871D7600FA6780 /* DatabaseController */,
 				DD44FC532989AB1100ABB169 /* CustomRowController */,
 				DD44FC4C29899A8900ABB169 /* MyTableViewCell */,
+				DDF1A24E298B75E20088AC75 /* ViewImagesController */,
 				DDF49D332984E5B800A50EA7 /* Main.storyboard */,
 				DDF49D392984E5B900A50EA7 /* Assets.xcassets */,
 				DDF49D3B2984E5B900A50EA7 /* LaunchScreen.storyboard */,
 				DDF49D3E2984E5B900A50EA7 /* Info.plist */,
 				DDF49D3F2984E5B900A50EA7 /* main.m */,
 				DDF49D362984E5B800A50EA7 /* Dogs.xcdatamodeld */,
-				DDF1A24E298B75E20088AC75 /* ViewImagesController */,
 			);
 			path = Dogs;
 			sourceTree = "<group>";

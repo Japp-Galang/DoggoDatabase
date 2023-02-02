@@ -72,6 +72,13 @@
     [self.view addSubview:backButton];
     
     
+    // Refresh Button
+    UIButton *refreshButton = [UIButton buttonWithType:UIButtonTypeCustom];
+    [refreshButton setImage:[UIImage imageNamed:@"refreshIcon"] forState:UIControlStateNormal];
+    refreshButton.frame = CGRectMake(self.view.frame.size.width / 15 * 12,self.view.frame.size.height / 24 * 2.2, self.view.frame.size.width / 12, self.view.frame.size.height/30);
+    [refreshButton addTarget:self action:@selector(updateValues) forControlEvents:UIControlEventTouchUpInside];
+    [self.view addSubview:refreshButton];
+    
     // Title
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, self.view.frame.size.height / 30 * 1.75, self.view.frame.size.width / 2,  self.view.frame.size.height/10)];
     titleLabel.text = @"Dogs";

@@ -22,6 +22,7 @@
 @property (nonatomic, strong) NSString* weight;
 @property (nonatomic, strong) NSString* dateAdded;
 
+
 -(IBAction)deleteRow:(id)sender;
 
 
