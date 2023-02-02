@@ -1,0 +1,500 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		DD44FC4B298978F100ABB169 /* MyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DD44FC4A298978F100ABB169 /* MyTableViewCell.m */; };
+		DD44FC522989AB0A00ABB169 /* CustomRowController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD44FC512989AB0A00ABB169 /* CustomRowController.m */; };
+		DD4F839C2986074E00C4C268 /* ViewUpdateController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD4F839B2986074E00C4C268 /* ViewUpdateController.m */; };
+		DDF1A24C298B75CF0088AC75 /* ViewImagesController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDF1A24B298B75CF0088AC75 /* ViewImagesController.m */; };
+		DDF49D2C2984E5B800A50EA7 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DDF49D2B2984E5B800A50EA7 /* AppDelegate.m */; };
+		DDF49D2F2984E5B800A50EA7 /* SceneDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = DDF49D2E2984E5B800A50EA7 /* SceneDelegate.m */; };
+		DDF49D322984E5B800A50EA7 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDF49D312984E5B800A50EA7 /* ViewController.m */; };
+		DDF49D352984E5B800A50EA7 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDF49D332984E5B800A50EA7 /* Main.storyboard */; };
+		DDF49D382984E5B800A50EA7 /* Dogs.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = DDF49D362984E5B800A50EA7 /* Dogs.xcdatamodeld */; };
+		DDF49D3A2984E5B900A50EA7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DDF49D392984E5B900A50EA7 /* Assets.xcassets */; };
+		DDF49D3D2984E5B900A50EA7 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DDF49D3B2984E5B900A50EA7 /* LaunchScreen.storyboard */; };
+		DDF49D402984E5B900A50EA7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = DDF49D3F2984E5B900A50EA7 /* main.m */; };
+		DDF49D482984E60800A50EA7 /* FMDB in Frameworks */ = {isa = PBXBuildFile; productRef = DDF49D472984E60800A50EA7 /* FMDB */; };
+		DDF49D4B2984E63A00A50EA7 /* DatabaseController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDF49D4A2984E63A00A50EA7 /* DatabaseController.m */; };
+		DDF6CB09298720B500FA6780 /* AddDoggoController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDF6CB08298720B500FA6780 /* AddDoggoController.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		DD44FC49298978F100ABB169 /* MyTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyTableViewCell.h; sourceTree = "<group>"; };
+		DD44FC4A298978F100ABB169 /* MyTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyTableViewCell.m; sourceTree = "<group>"; };
+		DD44FC4F2989AAAB00ABB169 /* CustomRowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomRowController.h; sourceTree = "<group>"; };
+		DD44FC512989AB0A00ABB169 /* CustomRowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomRowController.m; sourceTree = "<group>"; };
+		DD4F839B2986074E00C4C268 /* ViewUpdateController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewUpdateController.m; sourceTree = "<group>"; };
+		DD4F839D2986078F00C4C268 /* ViewUpdateController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewUpdateController.h; sourceTree = "<group>"; };
+		DDF1A24B298B75CF0088AC75 /* ViewImagesController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewImagesController.m; sourceTree = "<group>"; };
+		DDF1A24D298B75DC0088AC75 /* ViewImagesController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewImagesController.h; sourceTree = "<group>"; };
+		DDF49D272984E5B800A50EA7 /* Dogs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Dogs.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		DDF49D2A2984E5B800A50EA7 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		DDF49D2B2984E5B800A50EA7 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		DDF49D2D2984E5B800A50EA7 /* SceneDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SceneDelegate.h; sourceTree = "<group>"; };
+		DDF49D2E2984E5B800A50EA7 /* SceneDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SceneDelegate.m; sourceTree = "<group>"; };
+		DDF49D302984E5B800A50EA7 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
+		DDF49D312984E5B800A50EA7 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		DDF49D342984E5B800A50EA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		DDF49D372984E5B800A50EA7 /* Dogs.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Dogs.xcdatamodel; sourceTree = "<group>"; };
+		DDF49D392984E5B900A50EA7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		DDF49D3C2984E5B900A50EA7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		DDF49D3E2984E5B900A50EA7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		DDF49D3F2984E5B900A50EA7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		DDF49D492984E63200A50EA7 /* DatabaseController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DatabaseController.h; sourceTree = "<group>"; };
+		DDF49D4A2984E63A00A50EA7 /* DatabaseController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DatabaseController.m; sourceTree = "<group>"; };
+		DDF6CB08298720B500FA6780 /* AddDoggoController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AddDoggoController.m; sourceTree = "<group>"; };
+		DDF6CB0A2987210B00FA6780 /* AddDoggoController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AddDoggoController.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		DDF49D242984E5B800A50EA7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDF49D482984E60800A50EA7 /* FMDB in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		DD44FC4C29899A8900ABB169 /* MyTableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				DD44FC49298978F100ABB169 /* MyTableViewCell.h */,
+				DD44FC4A298978F100ABB169 /* MyTableViewCell.m */,
+			);
+			path = MyTableViewCell;
+			sourceTree = "<group>";
+		};
+		DD44FC532989AB1100ABB169 /* CustomRowController */ = {
+			isa = PBXGroup;
+			children = (
+				DD44FC4F2989AAAB00ABB169 /* CustomRowController.h */,
+				DD44FC512989AB0A00ABB169 /* CustomRowController.m */,
+			);
+			path = CustomRowController;
+			sourceTree = "<group>";
+		};
+		DDF1A24E298B75E20088AC75 /* ViewImagesController */ = {
+			isa = PBXGroup;
+			children = (
+				DDF1A24B298B75CF0088AC75 /* ViewImagesController.m */,
+				DDF1A24D298B75DC0088AC75 /* ViewImagesController.h */,
+			);
+			path = ViewImagesController;
+			sourceTree = "<group>";
+		};
+		DDF49D1E2984E5B800A50EA7 = {
+			isa = PBXGroup;
+			children = (
+				DDF49D292984E5B800A50EA7 /* Dogs */,
+				DDF49D282984E5B800A50EA7 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		DDF49D282984E5B800A50EA7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				DDF49D272984E5B800A50EA7 /* Dogs.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		DDF49D292984E5B800A50EA7 /* Dogs */ = {
+			isa = PBXGroup;
+			children = (
+				DDF49D2A2984E5B800A50EA7 /* AppDelegate.h */,
+				DDF49D2B2984E5B800A50EA7 /* AppDelegate.m */,
+				DDF49D2D2984E5B800A50EA7 /* SceneDelegate.h */,
+				DDF49D2E2984E5B800A50EA7 /* SceneDelegate.m */,
+				DDF6CB0B2987211000FA6780 /* AddDoggoController */,
+				DDF6CB0729871D9500FA6780 /* ViewController */,
+				DDF6CB0629871D8900FA6780 /* ViewUpdateController */,
+				DDF6CB0529871D7600FA6780 /* DatabaseController */,
+				DD44FC532989AB1100ABB169 /* CustomRowController */,
+				DD44FC4C29899A8900ABB169 /* MyTableViewCell */,
+				DDF49D332984E5B800A50EA7 /* Main.storyboard */,
+				DDF49D392984E5B900A50EA7 /* Assets.xcassets */,
+				DDF49D3B2984E5B900A50EA7 /* LaunchScreen.storyboard */,
+				DDF49D3E2984E5B900A50EA7 /* Info.plist */,
+				DDF49D3F2984E5B900A50EA7 /* main.m */,
+				DDF49D362984E5B800A50EA7 /* Dogs.xcdatamodeld */,
+				DDF1A24E298B75E20088AC75 /* ViewImagesController */,
+			);
+			path = Dogs;
+			sourceTree = "<group>";
+		};
+		DDF6CB0529871D7600FA6780 /* DatabaseController */ = {
+			isa = PBXGroup;
+			children = (
+				DDF49D492984E63200A50EA7 /* DatabaseController.h */,
+				DDF49D4A2984E63A00A50EA7 /* DatabaseController.m */,
+			);
+			path = DatabaseController;
+			sourceTree = "<group>";
+		};
+		DDF6CB0629871D8900FA6780 /* ViewUpdateController */ = {
+			isa = PBXGroup;
+			children = (
+				DD4F839D2986078F00C4C268 /* ViewUpdateController.h */,
+				DD4F839B2986074E00C4C268 /* ViewUpdateController.m */,
+			);
+			path = ViewUpdateController;
+			sourceTree = "<group>";
+		};
+		DDF6CB0729871D9500FA6780 /* ViewController */ = {
+			isa = PBXGroup;
+			children = (
+				DDF49D302984E5B800A50EA7 /* ViewController.h */,
+				DDF49D312984E5B800A50EA7 /* ViewController.m */,
+			);
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		DDF6CB0B2987211000FA6780 /* AddDoggoController */ = {
+			isa = PBXGroup;
+			children = (
+				DDF6CB0A2987210B00FA6780 /* AddDoggoController.h */,
+				DDF6CB08298720B500FA6780 /* AddDoggoController.m */,
+			);
+			path = AddDoggoController;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		DDF49D262984E5B800A50EA7 /* Dogs */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = DDF49D432984E5B900A50EA7 /* Build configuration list for PBXNativeTarget "Dogs" */;
+			buildPhases = (
+				DDF49D232984E5B800A50EA7 /* Sources */,
+				DDF49D242984E5B800A50EA7 /* Frameworks */,
+				DDF49D252984E5B800A50EA7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Dogs;
+			packageProductDependencies = (
+				DDF49D472984E60800A50EA7 /* FMDB */,
+			);
+			productName = Dogs;
+			productReference = DDF49D272984E5B800A50EA7 /* Dogs.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		DDF49D1F2984E5B800A50EA7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					DDF49D262984E5B800A50EA7 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = DDF49D222984E5B800A50EA7 /* Build configuration list for PBXProject "Dogs" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = DDF49D1E2984E5B800A50EA7;
+			packageReferences = (
+				DDF49D462984E60800A50EA7 /* XCRemoteSwiftPackageReference "fmdb" */,
+			);
+			productRefGroup = DDF49D282984E5B800A50EA7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				DDF49D262984E5B800A50EA7 /* Dogs */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		DDF49D252984E5B800A50EA7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDF49D3D2984E5B900A50EA7 /* LaunchScreen.storyboard in Resources */,
+				DDF49D3A2984E5B900A50EA7 /* Assets.xcassets in Resources */,
+				DDF49D352984E5B800A50EA7 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		DDF49D232984E5B800A50EA7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DDF49D4B2984E63A00A50EA7 /* DatabaseController.m in Sources */,
+				DDF49D402984E5B900A50EA7 /* main.m in Sources */,
+				DDF49D322984E5B800A50EA7 /* ViewController.m in Sources */,
+				DDF1A24C298B75CF0088AC75 /* ViewImagesController.m in Sources */,
+				DD44FC4B298978F100ABB169 /* MyTableViewCell.m in Sources */,
+				DD4F839C2986074E00C4C268 /* ViewUpdateController.m in Sources */,
+				DDF6CB09298720B500FA6780 /* AddDoggoController.m in Sources */,
+				DDF49D2C2984E5B800A50EA7 /* AppDelegate.m in Sources */,
+				DDF49D382984E5B800A50EA7 /* Dogs.xcdatamodeld in Sources */,
+				DDF49D2F2984E5B800A50EA7 /* SceneDelegate.m in Sources */,
+				DD44FC522989AB0A00ABB169 /* CustomRowController.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		DDF49D332984E5B800A50EA7 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DDF49D342984E5B800A50EA7 /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		DDF49D3B2984E5B900A50EA7 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				DDF49D3C2984E5B900A50EA7 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		DDF49D412984E5B900A50EA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		DDF49D422984E5B900A50EA7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		DDF49D442984E5B900A50EA7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Dogs/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Jappy.Dogs;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		DDF49D452984E5B900A50EA7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Dogs/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = Jappy.Dogs;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		DDF49D222984E5B800A50EA7 /* Build configuration list for PBXProject "Dogs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDF49D412984E5B900A50EA7 /* Debug */,
+				DDF49D422984E5B900A50EA7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		DDF49D432984E5B900A50EA7 /* Build configuration list for PBXNativeTarget "Dogs" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				DDF49D442984E5B900A50EA7 /* Debug */,
+				DDF49D452984E5B900A50EA7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		DDF49D462984E60800A50EA7 /* XCRemoteSwiftPackageReference "fmdb" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ccgus/fmdb";
+			requirement = {
+				kind = exactVersion;
+				version = 2.7.7;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		DDF49D472984E60800A50EA7 /* FMDB */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = DDF49D462984E60800A50EA7 /* XCRemoteSwiftPackageReference "fmdb" */;
+			productName = FMDB;
+		};
+/* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		DDF49D362984E5B800A50EA7 /* Dogs.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				DDF49D372984E5B800A50EA7 /* Dogs.xcdatamodel */,
+			);
+			currentVersion = DDF49D372984E5B800A50EA7 /* Dogs.xcdatamodel */;
+			path = Dogs.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
+	};
+	rootObject = DDF49D1F2984E5B800A50EA7 /* Project object */;
+}
