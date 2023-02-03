@@ -27,6 +27,8 @@
     return sharedInstance;
 }
 
+
+
 - (instancetype)init
 {
     self = [super init];
@@ -38,7 +40,10 @@
         self.databaseQueue = [FMDatabaseQueue databaseQueueWithPath:writableDBPath];
         
         [self.databaseQueue inDatabase:^(FMDatabase *db) {
-            [db executeUpdate:@"CREATE TABLE IF NOT EXISTS Dog (ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER, breed TEXT, weight INTEGER, dateAdded TEXT)"];
+            [db executeUpdate:@"CREATE TABLE IF NOT EXISTS Dog(ID INTEGER PRIMARY KEY AUTOINCREMENT, name TEXT, age INTEGER, breed TEXT, weight INTEGER, dateAdded TEXT)"];
+        }];
+        [self.databaseQueue inDatabase:^(FMDatabase *db) {
+            [db executeUpdate:@"CREATE TABLE IF NOT EXISTS Image(imageID INTEGER PRIMARY KEY AUTOINCREMENT, dogID INTEGER NOT NULL, image BLOB, FOREIGN KEY(dogID) REFERENCES Dog(ID))"];
         }];
     }
     return self;
@@ -69,6 +74,24 @@ Adds dog to database of table: Dog
 
 
 /*
+ Adds image to associated dog ID, where
+ ident: Dog ID
+ image: The image to be uploaded
+ */
+- (void)addImage:(NSData *)image ident:(NSString *)ident
+{
+    
+    [self.databaseQueue inDatabase:^(FMDatabase *db) {
+        BOOL success = [db executeUpdate:@"INSERT INTO Image (dogID, image) VALUES (?, ?)", ident, image];
+        if (!success) {
+            NSLog(@"Error deleting row: %@", [db lastErrorMessage]);
+        }
+    }];
+}
+
+
+
+/*
  Call to return an Array of dictionaries of each entity in the table: Dog
  */
 - (NSArray *)getAllDogs
@@ -89,6 +112,24 @@ Adds dog to database of table: Dog
         }
     }];
     return [dogs copy];
+}
+
+
+
+/*
+ Returns the images of a selected Dog ID
+ */
+- (NSArray *)returnDogImages:(NSString *)ident
+{
+    __block NSMutableArray *dogImages = [NSMutableArray array];
+    [self.databaseQueue inDatabase:^(FMDatabase *db) {
+        FMResultSet *result = [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM Image WHERE ID = %@", ident]];
+        while ([result next]) {
+            NSData *dogData     = [result dataForColumn:@"image"];
+            [dogImages addObject:@{@"image": dogData}];
+        }
+    }];
+    return [dogImages copy];
 }
 
 
@@ -126,6 +167,7 @@ Adds dog to database of table: Dog
 }
  
 
+
 /*
  Deletes a row,
  Parameters:
@@ -141,4 +183,8 @@ Adds dog to database of table: Dog
         }
     }];
 }
+
+
+
+
 @end

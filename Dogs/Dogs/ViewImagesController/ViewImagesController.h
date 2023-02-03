@@ -10,8 +10,13 @@
 
 @interface ViewImagesController : UIViewController
 
+@property (nonatomic, strong) NSString *dogName;
+@property (nonatomic, strong) NSString *ident;
 
 - (void)viewDidLoad;
 
 
 @end
+
+//{length = 285650, bytes = 0xffd8ffe0 00104a46 49460001 01000048 JPEG
+

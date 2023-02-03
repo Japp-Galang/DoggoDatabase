@@ -6,7 +6,7 @@
 //
 
 #import <UIKit/UIKit.h>
-
+#import "ViewImagesController.h"
 
 @interface CustomRowController : UIViewController
 
@@ -25,5 +25,6 @@
 
 -(IBAction)deleteRow:(id)sender;
 
+@property (nonatomic, strong) ViewImagesController *viewImagesController;
 
 @end

@@ -18,10 +18,15 @@
 
 - (NSArray *)getAllDogs;
 - (NSInteger)getDogSize;
+
+- (NSArray *)returnDogImages:(NSString *)ident;
+
 - (void)addDog:(NSString *)name age:(NSInteger)age breed:(NSString *)breed weight:(NSInteger)weight dateAdded:(NSDate *)dateAdded;
+- (void)addImage:(NSData *)image ident:(NSString *)ident;
 - (void)updateTable:(NSString *)table column:(NSString *)column newValue:(NSString *)newValue ident:(NSString*)ident;
 - (void)deleteTable;
 - (void)deleteRowFromTable:(NSString *)ident table:(NSString *)table;
+
 
 @end
 

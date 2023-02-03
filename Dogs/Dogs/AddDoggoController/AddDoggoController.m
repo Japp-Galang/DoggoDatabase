@@ -66,7 +66,6 @@
     // Back Button
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [backButton setTitle:@"Back" forState:UIControlStateNormal];
-   
     backButton.layer.borderWidth = 1.0;
     backButton.layer.borderColor = [UIColor whiteColor].CGColor;
     backButton.layer.cornerRadius = 15.0;

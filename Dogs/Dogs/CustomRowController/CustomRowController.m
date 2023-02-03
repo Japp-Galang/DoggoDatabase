@@ -13,7 +13,7 @@
 #import "ViewImagesController.h"
 
 
-@interface CustomRowController () <PreviousViewDelegate>
+@interface CustomRowController () 
 
 @property (strong, nonatomic) IBOutlet UITextField *changeValueField;
 @property (strong, nonatomic) NSString* updatedValue;
@@ -187,21 +187,13 @@
     viewImagesButton.layer.borderWidth = 2.0;
     viewImagesButton.layer.borderColor = [UIColor systemBlueColor].CGColor;
     viewImagesButton.layer.cornerRadius = 15.0;
-    viewImagesButton.titleLabel.font = [UIFont systemFontOfSize:self.view.frame.size.height/60];
+    viewImagesButton.titleLabel.font = [UIFont systemFontOfSize:self.view.frame.size.height/50];
     viewImagesButton.frame = CGRectMake(alignmentConstant * .5, self.view.frame.size.height / 20 * 12, self.view.frame.size.width/3, self.view.frame.size.height/20);
     [viewImagesButton setTitleColor:[UIColor systemBlueColor] forState:UIControlStateNormal];
-    //[viewImagesButton addTarget:self action:@selector(deleteRow:) forControlEvents:UIControlEventTouchUpInside];
+    [viewImagesButton addTarget:self action:@selector(goToViewImagesView:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:viewImagesButton];
 }
 
-- (void)viewDidDisappear:(BOOL)animated
-{
-    [super viewDidDisappear:YES];
-    ViewUpdateController *viewUpdateController = [[ViewUpdateController alloc] init];
-    
-    
-   
-}
 
 - (IBAction)deleteRow:(id)sender
 {
@@ -294,6 +286,14 @@
 
 
 
+- (IBAction)goToViewImagesView:(id)sender
+{
+    self.viewImagesController = [[ViewImagesController alloc] init];
+    self.viewImagesController.dogName = self.name;
+    self.viewImagesController.ident = self.ident;
+    [self presentViewController:self.viewImagesController animated: YES completion:nil];
+    
+}
 
 
 
