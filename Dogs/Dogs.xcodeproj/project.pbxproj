@@ -85,8 +85,8 @@
 		DDF1A24E298B75E20088AC75 /* ViewImagesController */ = {
 			isa = PBXGroup;
 			children = (
-				DDF1A24B298B75CF0088AC75 /* ViewImagesController.m */,
 				DDF1A24D298B75DC0088AC75 /* ViewImagesController.h */,
+				DDF1A24B298B75CF0088AC75 /* ViewImagesController.m */,
 			);
 			path = ViewImagesController;
 			sourceTree = "<group>";

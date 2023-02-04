@@ -10,20 +10,23 @@
 
 @interface ViewController ()
 
-
-
 @end
+
+
 
 @implementation ViewController
 
 - (void)viewDidLoad
 {
+    
     [super viewDidLoad];
-    CGFloat centerX = self.view.frame.size.width / 2;
+    CGFloat screenWidth = self.view.frame.size.width;
+    CGFloat screenHeight = self.view.frame.size.height;
+    CGFloat centerX = screenWidth / 2;
     
     // Background
     self.view.backgroundColor = [UIColor whiteColor];
-    CGRect backShape = CGRectMake(self.view.frame.size.width/4, self.view.frame.size.height / 20 * 1.5, self.view.frame.size.width / 2, self.view.frame.size.height/10);
+    CGRect backShape = CGRectMake( screenWidth/4, screenHeight / 20 * 1.5,  screenWidth / 2, screenHeight/10);
     UIBezierPath *path = [UIBezierPath bezierPathWithRoundedRect:backShape cornerRadius:20];
     CAShapeLayer *shapeLayer = [CAShapeLayer layer];
     shapeLayer.path = path.CGPath;
@@ -31,13 +34,19 @@
     [self.view.layer addSublayer:shapeLayer];
     
     // Title
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, self.view.frame.size.height / 20 * 1.5, self.view.frame.size.width / 2,  self.view.frame.size.height/10)];
+    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, screenHeight / 20 * 1.5,  screenWidth / 2,  screenHeight/10)];
     titleLabel.text = @"Doggos";
     titleLabel.textColor = [UIColor whiteColor];
     titleLabel.font = [UIFont systemFontOfSize:self.view.frame.size.height/20];
     titleLabel.center = CGPointMake(centerX, titleLabel.center.y);
     titleLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:titleLabel];
+    
+    
+    // Paw Icon
+    UIImageView *pawIcon = [[UIImageView alloc] initWithImage:[UIImage imageNamed:@"PawPrint"]];
+    pawIcon.frame = CGRectMake( screenWidth / 4 * 3, screenHeight / 20 * 1.5, 100, 100);
+    [self.view addSubview:pawIcon];
     
     
     // Button for Add Dog
@@ -47,7 +56,7 @@
     addDoggoButton.layer.borderColor = [UIColor systemBrownColor].CGColor;
     addDoggoButton.layer.backgroundColor = [UIColor whiteColor].CGColor;
     addDoggoButton.layer.cornerRadius = 15.0;
-    addDoggoButton.frame = CGRectMake(100, self.view.frame.size.height / 4, self.view.frame.size.width / 2.5 , self.view.frame.size.height/16);
+    addDoggoButton.frame = CGRectMake(100, screenHeight / 4,  screenWidth / 2.5 , screenHeight / 16);
     addDoggoButton.titleLabel.font = [UIFont systemFontOfSize:self.view.frame.size.height/40];
     [addDoggoButton setTitleColor:[UIColor systemBrownColor] forState:UIControlStateNormal];
     addDoggoButton.center = CGPointMake(centerX, addDoggoButton.center.y);
@@ -60,11 +69,10 @@
     [viewUpdateButton setTitle:@"View/Update" forState:UIControlStateNormal];
     viewUpdateButton.layer.borderWidth = 2.0;
     viewUpdateButton.layer.borderColor = [UIColor systemBrownColor].CGColor;
-    addDoggoButton.layer.backgroundColor = [UIColor whiteColor].CGColor;
     viewUpdateButton.layer.backgroundColor = [UIColor whiteColor].CGColor;
     viewUpdateButton.layer.cornerRadius = 15.0;
-    viewUpdateButton.frame = CGRectMake(100, self.view.frame.size.height / 8 * 3, self.view.frame.size.width / 2.5, self.view.frame.size.height/16);
-    viewUpdateButton.titleLabel.font = [UIFont systemFontOfSize:self.view.frame.size.height/40];
+    viewUpdateButton.frame = CGRectMake(100, screenHeight / 8 * 3,  screenWidth / 2.5, screenHeight / 16);
+    viewUpdateButton.titleLabel.font = [UIFont systemFontOfSize:screenHeight / 40];
     [viewUpdateButton setTitleColor:[UIColor systemBrownColor] forState:UIControlStateNormal];
     viewUpdateButton.center = CGPointMake(centerX, viewUpdateButton.center.y);
     [viewUpdateButton addTarget:self action:@selector(goToUpdateView:) forControlEvents:UIControlEventTouchUpInside];

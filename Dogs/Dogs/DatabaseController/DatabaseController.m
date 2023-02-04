@@ -123,12 +123,13 @@ Adds dog to database of table: Dog
 {
     __block NSMutableArray *dogImages = [NSMutableArray array];
     [self.databaseQueue inDatabase:^(FMDatabase *db) {
-        FMResultSet *result = [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM Image WHERE ID = %@", ident]];
+        FMResultSet *result = [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM Image WHERE dogID = %@", ident]];
         while ([result next]) {
             NSData *dogData     = [result dataForColumn:@"image"];
-            [dogImages addObject:@{@"image": dogData}];
+            [dogImages addObject:dogData];
         }
     }];
+    NSLog(@"%@", dogImages);
     return [dogImages copy];
 }
 

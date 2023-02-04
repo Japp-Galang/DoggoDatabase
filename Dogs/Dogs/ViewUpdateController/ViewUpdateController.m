@@ -25,12 +25,9 @@
 - (instancetype)init
 {
     self = [super init];
-    if (self) {
-        self.modalPresentationStyle = UIModalPresentationFullScreen;
-    }
+    self.modalPresentationStyle = UIModalPresentationFullScreen;
+    
     return self;
-    
-    
 }
 
 
@@ -62,7 +59,7 @@
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [backButton setTitle:@"Back" forState:UIControlStateNormal];
    
-    backButton.layer.borderWidth = 2.0;
+    backButton.layer.borderWidth = 1.0;
     backButton.layer.borderColor = [UIColor whiteColor].CGColor;
     backButton.layer.cornerRadius = 15.0;
     backButton.frame = CGRectMake(self.view.frame.size.width / 15, self.view.frame.size.height / 24 * 2, self.view.frame.size.width / 6, self.view.frame.size.height/20);
@@ -78,6 +75,7 @@
     refreshButton.frame = CGRectMake(self.view.frame.size.width / 15 * 12,self.view.frame.size.height / 24 * 2.2, self.view.frame.size.width / 12, self.view.frame.size.height/30);
     [refreshButton addTarget:self action:@selector(updateValues) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:refreshButton];
+    
     
     // Title
     UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, self.view.frame.size.height / 30 * 1.75, self.view.frame.size.width / 2,  self.view.frame.size.height/10)];
