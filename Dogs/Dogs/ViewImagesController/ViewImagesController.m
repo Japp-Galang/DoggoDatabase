@@ -16,6 +16,7 @@
 @property (nonatomic) CGFloat imageWidth;
 @property (nonatomic) CGFloat imageHeight;
 
+@property (nonatomic, strong) UIImage* currentImage;
 @property (nonatomic, strong) UIImageView* currentImageView;
 @property (nonatomic, strong) UIButton* previousButton;
 @property (nonatomic, strong) UIButton* nextButton;
@@ -106,8 +107,8 @@
         self.selectedImageIndex = 0;
         
         // Loads First Image
-        UIImage *image = [UIImage imageWithData:self.dogData[0]];
-        self.currentImageView = [[UIImageView alloc] initWithImage:image];
+        self.currentImage = [UIImage imageWithData:self.dogData[0]];
+        self.currentImageView = [[UIImageView alloc] initWithImage:self.currentImage];
         self.currentImageView.frame = CGRectMake(0, screenHeight / 7 * 1.1, self.currentImageView.frame.size.width / 2, self.currentImageView.frame.size.height / 2);
         [self.view addSubview:self.currentImageView];
         
@@ -165,8 +166,6 @@
  */
 - (IBAction)goPrevious:(id)sender
 {
-    
-    
     self.selectedImageIndex = self.selectedImageIndex - 1;
     if (self.selectedImageIndex == 0){
         self.previousButton.layer.backgroundColor = [UIColor grayColor].CGColor;
@@ -178,6 +177,7 @@
     
     // Reloads previous image to view
     UIImage *image = [UIImage imageWithData:self.dogData[self.selectedImageIndex]];
+    [self.currentImageView removeFromSuperview]; // Deloads previous image
     self.currentImageView = [[UIImageView alloc] initWithImage:image];
     self.currentImageView.frame = CGRectMake(0, self.view.frame.size.height / 7 * 1.1, self.currentImageView.frame.size.width / 2, self.currentImageView.frame.size.height / 2);
     [self.view addSubview:self.currentImageView];
@@ -203,6 +203,7 @@
     
     // Reloads next image to view
     UIImage *image = [UIImage imageWithData:self.dogData[self.selectedImageIndex]];
+    [self.currentImageView removeFromSuperview]; // Deloads previous image
     self.currentImageView = [[UIImageView alloc] initWithImage:image];
     self.currentImageView.frame = CGRectMake(0, self.view.frame.size.height / 7 * 1.1, self.currentImageView.frame.size.width / 2, self.currentImageView.frame.size.height / 2);
     [self.view addSubview:self.currentImageView];
