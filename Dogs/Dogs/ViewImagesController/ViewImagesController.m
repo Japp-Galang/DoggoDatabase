@@ -100,7 +100,14 @@
     self.imageCount = [self.dogData count];
     
     if (self.imageCount == 0){
-        NSLog(@"dogData is empty");
+        UILabel *noImagesLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, screenHeight / 30 * 4, screenWidth,  screenHeight/10)];
+        noImagesLabel.text = @"No images for this dog";
+        noImagesLabel.textColor = [UIColor grayColor];
+        noImagesLabel.font = [UIFont systemFontOfSize:screenHeight/40];
+        UIFontDescriptor *fontDescriptor = [noImagesLabel.font.fontDescriptor fontDescriptorWithSymbolicTraits:UIFontDescriptorTraitItalic];
+        noImagesLabel.font = [UIFont fontWithDescriptor:fontDescriptor size:noImagesLabel.font.pointSize];
+        noImagesLabel.textAlignment = NSTextAlignmentCenter;
+        [self.view addSubview:noImagesLabel];
     }
     else{
         self.lastImageIndex = self.imageCount - 1;
