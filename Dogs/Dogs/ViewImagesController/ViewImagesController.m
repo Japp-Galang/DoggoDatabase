@@ -48,7 +48,7 @@
     
     CGFloat screenWidth = self.view.frame.size.width;
     CGFloat screenHeight = self.view.frame.size.height;
-    CGFloat centerX = screenWidth/ 2;
+    CGFloat centerX = screenWidth / 2;
     
     
     // Background
@@ -109,7 +109,10 @@
         // Loads First Image
         self.currentImage = [UIImage imageWithData:self.dogData[0]];
         self.currentImageView = [[UIImageView alloc] initWithImage:self.currentImage];
-        self.currentImageView.frame = CGRectMake(0, screenHeight / 7 * 1.1, self.currentImageView.frame.size.width / 2, self.currentImageView.frame.size.height / 2);
+        [self setCorrectImageSize:self.currentImageView.frame.size.width height:self.currentImageView.frame.size.height];
+        [self setCorrectImageSize:self.currentImageView.frame.size.width height:self.currentImageView.frame.size.height];
+        self.currentImageView.frame = CGRectMake(0, self.view.frame.size.height / 7 * 1.1, self.imageWidth, self.imageHeight);
+        self.currentImageView.center = CGPointMake(centerX, self.currentImageView.center.y);
         [self.view addSubview:self.currentImageView];
         
         // Button to go to previous photo
@@ -117,7 +120,7 @@
         [self.previousButton setTitle:@"←" forState:UIControlStateNormal];
         self.previousButton.layer.borderWidth = 1.0;
         self.previousButton.layer.borderColor = [UIColor whiteColor].CGColor;
-        self.previousButton.frame = CGRectMake(0, screenHeight / 10 * 8, screenWidth / 2, screenHeight / 10);
+        self.previousButton.frame = CGRectMake(0, screenHeight / 10 * 8.1, screenWidth / 2, screenHeight / 10);
         self.previousButton.titleLabel.font = [UIFont systemFontOfSize:screenHeight / 30];
         self.previousButton.layer.backgroundColor = [UIColor grayColor].CGColor;
         [self.previousButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -130,7 +133,7 @@
         [self.nextButton setTitle:@"→" forState:UIControlStateNormal];
         self.nextButton.layer.borderWidth = 1.0;
         self.nextButton.layer.borderColor = [UIColor whiteColor].CGColor;
-        self.nextButton.frame = CGRectMake(screenWidth / 2, screenHeight / 10 * 8, screenWidth / 2, screenHeight / 10);
+        self.nextButton.frame = CGRectMake(screenWidth / 2, screenHeight / 10 * 8.1, screenWidth / 2, screenHeight / 10);
         self.nextButton.titleLabel.font = [UIFont systemFontOfSize:screenHeight / 30];
         self.nextButton.layer.backgroundColor = [UIColor systemBrownColor].CGColor;
         [self.nextButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
@@ -155,6 +158,23 @@
 
 - (void)setCorrectImageSize:(CGFloat)width height:(CGFloat)height
 {
+    CGFloat maxImageHeight = (self.view.frame.size.height / 10 * 8.1) - (self.view.frame.size.height / 7 * 1.1);
+    CGFloat ratioCheck = maxImageHeight / self.view.frame.size.width;
+    CGFloat imageRatio = width / height;
+    
+    if(imageRatio < ratioCheck){
+        CGFloat factor = maxImageHeight / height;
+        self.imageHeight = maxImageHeight;
+        self.imageWidth = width * factor;
+        NSLog(@"height is greater than maxImage");
+    }
+    else{
+        CGFloat factor = self.view.frame.size.width / width;
+        self.imageWidth = self.view.frame.size.width;
+        self.imageHeight = height * factor;
+        NSLog(@"height is less than maxImage");
+    }
+    NSLog(@"%d", self.imageWidth);
     
 }
 
@@ -166,6 +186,8 @@
  */
 - (IBAction)goPrevious:(id)sender
 {
+    CGFloat centerX = self.view.frame.size.width / 2;
+    
     self.selectedImageIndex = self.selectedImageIndex - 1;
     if (self.selectedImageIndex == 0){
         self.previousButton.layer.backgroundColor = [UIColor grayColor].CGColor;
@@ -179,7 +201,9 @@
     UIImage *image = [UIImage imageWithData:self.dogData[self.selectedImageIndex]];
     [self.currentImageView removeFromSuperview]; // Deloads previous image
     self.currentImageView = [[UIImageView alloc] initWithImage:image];
-    self.currentImageView.frame = CGRectMake(0, self.view.frame.size.height / 7 * 1.1, self.currentImageView.frame.size.width / 2, self.currentImageView.frame.size.height / 2);
+    [self setCorrectImageSize:self.currentImageView.frame.size.width height:self.currentImageView.frame.size.height];
+    self.currentImageView.frame = CGRectMake(0, self.view.frame.size.height / 7 * 1.1, self.imageWidth, self.imageHeight);
+    self.currentImageView.center = CGPointMake(centerX, self.currentImageView.center.y);
     [self.view addSubview:self.currentImageView];
      
 }
@@ -192,6 +216,8 @@
  */
 - (IBAction)goNext:(id)sender
 {
+    CGFloat centerX = self.view.frame.size.width / 2;
+    
     self.selectedImageIndex = self.selectedImageIndex + 1;
     if (self.selectedImageIndex == self.lastImageIndex){
         self.nextButton.layer.backgroundColor = [UIColor grayColor].CGColor;
@@ -205,7 +231,9 @@
     UIImage *image = [UIImage imageWithData:self.dogData[self.selectedImageIndex]];
     [self.currentImageView removeFromSuperview]; // Deloads previous image
     self.currentImageView = [[UIImageView alloc] initWithImage:image];
-    self.currentImageView.frame = CGRectMake(0, self.view.frame.size.height / 7 * 1.1, self.currentImageView.frame.size.width / 2, self.currentImageView.frame.size.height / 2);
+    [self setCorrectImageSize:self.currentImageView.frame.size.width height:self.currentImageView.frame.size.height];
+    self.currentImageView.frame = CGRectMake(0, self.view.frame.size.height / 7 * 1.1, self.imageWidth, self.imageHeight);
+    self.currentImageView.center = CGPointMake(centerX, self.currentImageView.center.y);
     [self.view addSubview:self.currentImageView];
 }
 
