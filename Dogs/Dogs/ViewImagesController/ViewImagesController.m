@@ -167,19 +167,20 @@
 {
     CGFloat maxImageHeight = (self.view.frame.size.height / 10 * 8.1) - (self.view.frame.size.height / 7 * 1.1);
     CGFloat ratioCheck = maxImageHeight / self.view.frame.size.width;
-    CGFloat imageRatio = width / height;
+    CGFloat imageRatio = height / width;
     
-    if(imageRatio < ratioCheck){
+    NSLog(@"Checking if imageRatio: %f is greater than ratioCheck %f", imageRatio, ratioCheck);
+    if(imageRatio > ratioCheck){
         CGFloat factor = maxImageHeight / height;
         self.imageHeight = maxImageHeight;
         self.imageWidth = width * factor;
-        NSLog(@"height is greater than maxImage");
+        NSLog(@"imageRatio is greater than ratioCheck");
     }
     else{
         CGFloat factor = self.view.frame.size.width / width;
         self.imageWidth = self.view.frame.size.width;
         self.imageHeight = height * factor;
-        NSLog(@"height is less than maxImage");
+        NSLog(@"imageRatio is less than ratioCheck");
     }
     NSLog(@"%d", self.imageWidth);
     
