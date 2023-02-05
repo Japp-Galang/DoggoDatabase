@@ -126,10 +126,12 @@ Adds dog to database of table: Dog
         FMResultSet *result = [db executeQuery:[NSString stringWithFormat:@"SELECT * FROM Image WHERE dogID = %@", ident]];
         while ([result next]) {
             NSData *dogData     = [result dataForColumn:@"image"];
-            [dogImages addObject:dogData];
+            NSString *imageID   = [result stringForColumn:@"imageID"];
+            [dogImages addObject:@{@"imageData" : dogData, @"imageID" : imageID}];
+            
         }
     }];
-    NSLog(@"%@", dogImages);
+   
     return [dogImages copy];
 }
 
@@ -172,18 +174,39 @@ Adds dog to database of table: Dog
 /*
  Deletes a row,
  Parameters:
- NSInteger: ident
- NSString: table
+ NSString: ident
  */
-- (void)deleteRowFromTable:(NSString *)ident table:(NSString *)table
+- (void)deleteRowFromDog:(NSString *)ident
 {
     [self.databaseQueue inDatabase:^(FMDatabase *db) {
-        BOOL success = [db executeUpdate:[NSString stringWithFormat:@"DELETE FROM %@ WHERE ID = %@", table, ident]];
+        BOOL success = [db executeUpdate:[NSString stringWithFormat:@"DELETE FROM Dog WHERE ID = %@", ident]];
+        if (!success) {
+            NSLog(@"Error deleting row: %@", [db lastErrorMessage]);
+        }
+        BOOL success2 = [db executeUpdate:[NSString stringWithFormat:@"DELETE FROM Image WHERE dogID = %@", ident]];
+        if (!success2) {
+            NSLog(@"Error deleting row: %@", [db lastErrorMessage]);
+        }
+    }];
+}
+
+
+
+/*
+ Deletes a row,
+ Parameters:
+ NSString: ident
+ */
+- (void)deleteRowFromImage:(NSString *)ident
+{
+    [self.databaseQueue inDatabase:^(FMDatabase *db) {
+        BOOL success = [db executeUpdate:[NSString stringWithFormat:@"DELETE FROM Image WHERE imageID = %@", ident]];
         if (!success) {
             NSLog(@"Error deleting row: %@", [db lastErrorMessage]);
         }
     }];
 }
+
 
 
 

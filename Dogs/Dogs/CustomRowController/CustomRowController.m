@@ -199,12 +199,11 @@
 {
     
     DatabaseController *dbController = [DatabaseController sharedInstance];
-    [dbController deleteRowFromTable:[NSString stringWithFormat:@"%@", self.ident] table:@"Dog"];
+    [dbController deleteRowFromDog:self.ident];
     [self dismissViewControllerAnimated:YES completion:nil];
     
     
 }
-
 
 
 

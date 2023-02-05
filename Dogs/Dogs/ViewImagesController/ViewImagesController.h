@@ -18,5 +18,5 @@
 
 @end
 
-//{length = 285650, bytes = 0xffd8ffe0 00104a46 49460001 01000048 JPEG
+
 

@@ -25,8 +25,8 @@
 - (void)addImage:(NSData *)image ident:(NSString *)ident;
 - (void)updateTable:(NSString *)table column:(NSString *)column newValue:(NSString *)newValue ident:(NSString*)ident;
 - (void)deleteTable;
-- (void)deleteRowFromTable:(NSString *)ident table:(NSString *)table;
-
+- (void)deleteRowFromDog:(NSString *)ident;
+- (void)deleteRowFromImage:(NSString *)ident;
 
 @end
 
