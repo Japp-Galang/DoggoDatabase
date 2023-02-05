@@ -182,8 +182,6 @@
         self.imageHeight = height * factor;
         NSLog(@"imageRatio is less than ratioCheck");
     }
-    NSLog(@"%d", self.imageWidth);
-    
 }
 
 
@@ -264,8 +262,29 @@
     DatabaseController *dbController = [DatabaseController sharedInstance];
     [dbController addImage:imageData ident:self.ident];
     
+    // Reloads images of the dog
+    self.dogData = [dbController returnDogImages:self.ident];
+    self.imageCount = [self.dogData count];
+    self.lastImageIndex = self.imageCount - 1;
+    NSLog(@"%@", self.dogData);
     
+    // Laods the newly added image to view
+    self.selectedImageIndex = self.lastImageIndex;
+    UIImage *image = [UIImage imageWithData:self.dogData[self.selectedImageIndex]];
+    [self.currentImageView removeFromSuperview]; // Deloads previous image
+    self.currentImageView = [[UIImageView alloc] initWithImage:image];
+    [self setCorrectImageSize:self.currentImageView.frame.size.width height:self.currentImageView.frame.size.height];
+    self.currentImageView.frame = CGRectMake(0, self.view.frame.size.height / 7 * 1.1, self.imageWidth, self.imageHeight);
+    self.currentImageView.center = CGPointMake(self.view.frame.size.width / 2, self.currentImageView.center.y);
+    
+    [self.view addSubview:self.currentImageView];
     [self dismissViewControllerAnimated:YES completion:nil];
+    
+    // Updates image selector arrows to condition of being in the last image selection (since we are adding the image to the end
+    self.previousButton.layer.backgroundColor = [UIColor systemBrownColor].CGColor;
+    self.previousButton.userInteractionEnabled = YES;
+    self.nextButton.layer.backgroundColor = [UIColor grayColor].CGColor;
+    self.nextButton.userInteractionEnabled = NO;
 }
 
 
