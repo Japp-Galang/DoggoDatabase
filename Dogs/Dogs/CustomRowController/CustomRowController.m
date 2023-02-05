@@ -13,14 +13,25 @@
 #import "ViewImagesController.h"
 
 
+/*
+ Need to be able to update ViewUpdateController after making change as well as this view when making a change
+ */
+
 @interface CustomRowController () 
 
 @property (strong, nonatomic) IBOutlet UITextField *changeValueField;
-@property (strong, nonatomic) NSString* updatedValue;
-@property (strong, nonatomic) UIButton* cancelButton;
-@property (strong, nonatomic) UIButton* updateButton;
-@property (strong, nonatomic) NSString* currentlyUpdatingColumn;
+@property (strong, nonatomic) NSString *updatedValue;
+@property (strong, nonatomic) UIButton *cancelButton;
+@property (strong, nonatomic) UIButton *updateButton;
+@property (strong, nonatomic) NSString *currentlyUpdatingColumn;
 @property (nonatomic) bool updatingColumnIsString;
+
+@property (strong, nonatomic) UILabel *nameLabel;
+@property (strong, nonatomic) UILabel *identLabel;
+@property (strong, nonatomic) UILabel *ageLabel;
+@property (strong, nonatomic) UILabel *breedLabel;
+@property (strong, nonatomic) UILabel *weightLabel;
+
 
 @property (nonatomic, strong) ViewUpdateController *previousView;
 
@@ -77,46 +88,46 @@
     
     // Name
     // Title
-    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height / 20, self.view.frame.size.width,  self.view.frame.size.height/10)];
-    nameLabel.text = self.name;
-    nameLabel.textColor = [UIColor blackColor];
-    nameLabel.font = [UIFont systemFontOfSize:self.view.frame.size.height/20];
-    nameLabel.textAlignment = NSTextAlignmentCenter;
-    nameLabel.center = CGPointMake(self.view.frame.size.width / 2, nameLabel.center.y);
-    [self.view addSubview:nameLabel];
+    self.nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(0, self.view.frame.size.height / 20, self.view.frame.size.width,  self.view.frame.size.height/10)];
+    self.nameLabel.text = self.name;
+    self.nameLabel.textColor = [UIColor blackColor];
+    self.nameLabel.font = [UIFont systemFontOfSize:self.view.frame.size.height/20];
+    self.nameLabel.textAlignment = NSTextAlignmentCenter;
+    self.nameLabel.center = CGPointMake(self.view.frame.size.width / 2, self.nameLabel.center.y);
+    [self.view addSubview:self.nameLabel];
     
     
     // Identification Label
-    UILabel *identLabel = [[UILabel alloc] initWithFrame:CGRectMake(alignmentConstant * 2, self.view.frame.size.height / 20 * 3, self.view.frame.size.width - alignmentConstant,  self.view.frame.size.height/10)];
-    identLabel.text = [NSString stringWithFormat:@"ID: %@", self.ident];
-    identLabel.textColor = [UIColor blackColor];
-    identLabel.font = [UIFont systemFontOfSize:self.view.frame.size.height/40];
-    identLabel.textAlignment = NSTextAlignmentLeft;
-    [self.view addSubview:identLabel];
+    self.identLabel = [[UILabel alloc] initWithFrame:CGRectMake(alignmentConstant * 2, self.view.frame.size.height / 20 * 3, self.view.frame.size.width - alignmentConstant,  self.view.frame.size.height/10)];
+    self.identLabel.text = [NSString stringWithFormat:@"ID: %@", self.ident];
+    self.identLabel.textColor = [UIColor blackColor];
+    self.identLabel.font = [UIFont systemFontOfSize:self.view.frame.size.height/40];
+    self.identLabel.textAlignment = NSTextAlignmentLeft;
+    [self.view addSubview:self.identLabel];
     
     // Age Label
-    UILabel *ageLabel = [[UILabel alloc] initWithFrame:CGRectMake(alignmentConstant * 2, self.view.frame.size.height / 20 * 4, self.view.frame.size.width - alignmentConstant,  self.view.frame.size.height/10)];
-    ageLabel.text = [NSString stringWithFormat:@"Age: %@ Years Old", self.age];
-    ageLabel.textColor = [UIColor blackColor];
-    ageLabel.font = [UIFont systemFontOfSize:self.view.frame.size.height/40];
-    ageLabel.textAlignment = NSTextAlignmentLeft;
-    [self.view addSubview:ageLabel];
+    self.ageLabel = [[UILabel alloc] initWithFrame:CGRectMake(alignmentConstant * 2, self.view.frame.size.height / 20 * 4, self.view.frame.size.width - alignmentConstant,  self.view.frame.size.height/10)];
+    self.ageLabel.text = [NSString stringWithFormat:@"Age: %@ Years Old", self.age];
+    self.ageLabel.textColor = [UIColor blackColor];
+    self.ageLabel.font = [UIFont systemFontOfSize:self.view.frame.size.height/40];
+    self.ageLabel.textAlignment = NSTextAlignmentLeft;
+    [self.view addSubview:self.ageLabel];
     
     // Breed Label
-    UILabel *breedLabel = [[UILabel alloc] initWithFrame:CGRectMake(alignmentConstant * 2, self.view.frame.size.height / 20 * 5, self.view.frame.size.width - alignmentConstant,  self.view.frame.size.height/10)];
-    breedLabel.text = [NSString stringWithFormat:@"Breed: %@", self.breed];
-    breedLabel.textColor = [UIColor blackColor];
-    breedLabel.font = [UIFont systemFontOfSize:self.view.frame.size.height/40];
-    breedLabel.textAlignment = NSTextAlignmentLeft;
-    [self.view addSubview:breedLabel];
+    self.breedLabel = [[UILabel alloc] initWithFrame:CGRectMake(alignmentConstant * 2, self.view.frame.size.height / 20 * 5, self.view.frame.size.width - alignmentConstant,  self.view.frame.size.height/10)];
+    self.breedLabel.text = [NSString stringWithFormat:@"Breed: %@", self.breed];
+    self.breedLabel.textColor = [UIColor blackColor];
+    self.breedLabel.font = [UIFont systemFontOfSize:self.view.frame.size.height/40];
+    self.breedLabel.textAlignment = NSTextAlignmentLeft;
+    [self.view addSubview:self.breedLabel];
     
     // Weight Label
-    UILabel *weightLabel = [[UILabel alloc] initWithFrame:CGRectMake(alignmentConstant * 2, self.view.frame.size.height / 20 * 6, self.view.frame.size.width - alignmentConstant,  self.view.frame.size.height/10)];
-    weightLabel.text = [NSString stringWithFormat:@"Weight: %@ pounds", self.weight];
-    weightLabel.textColor = [UIColor blackColor];
-    weightLabel.font = [UIFont systemFontOfSize:self.view.frame.size.height/40];
-    weightLabel.textAlignment = NSTextAlignmentLeft;
-    [self.view addSubview:weightLabel];
+    self.weightLabel = [[UILabel alloc] initWithFrame:CGRectMake(alignmentConstant * 2, self.view.frame.size.height / 20 * 6, self.view.frame.size.width - alignmentConstant,  self.view.frame.size.height/10)];
+    self.weightLabel.text = [NSString stringWithFormat:@"Weight: %@ pounds", self.weight];
+    self.weightLabel.textColor = [UIColor blackColor];
+    self.weightLabel.font = [UIFont systemFontOfSize:self.view.frame.size.height/40];
+    self.weightLabel.textAlignment = NSTextAlignmentLeft;
+    [self.view addSubview:self.weightLabel];
     
     
     // Date Added Label
@@ -265,7 +276,7 @@
 
 
 
-- (void)updateField:(id)sender
+- (IBAction)updateField:(id)sender
 {
     DatabaseController *dbController = [DatabaseController sharedInstance];
     
@@ -273,13 +284,15 @@
     NSLog(@"Updated value: %@", self.updatedValue);
     if(self.updatingColumnIsString){
         [dbController updateTable:@"Dog" column:self.currentlyUpdatingColumn newValue: [NSString stringWithFormat:@"\"%@\"", self.updatedValue] ident:[NSString stringWithFormat:@"%@", self.ident]];
-    }
-    else {
+    } else {
         [dbController updateTable:@"Dog" column:self.currentlyUpdatingColumn newValue:[NSString stringWithFormat:@"%@", self.updatedValue] ident:[NSString stringWithFormat:@"%@", self.ident]];
     }
     self.changeValueField.text = @"";
     [self hideUpdaterObjects];
+    
     [self dismissViewControllerAnimated:YES completion:nil];
+    
+    
     
 }
 
