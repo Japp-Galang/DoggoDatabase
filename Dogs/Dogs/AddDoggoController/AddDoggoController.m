@@ -26,6 +26,10 @@
 @property (strong, nonatomic) UILabel* addedLabel;
 @property (strong, nonatomic) CAShapeLayer *addedShapeLayer;
 
+@property (strong, nonatomic) UILabel* invalidLabel;
+@property (strong, nonatomic) CAShapeLayer *invalidShapeLayer;
+
+
 @end
 
 @implementation AddDoggoController
@@ -58,7 +62,17 @@
     self.addedShapeLayer.path = path2.CGPath;
     self.addedShapeLayer.fillColor = [UIColor colorWithRed:0.49 green:0.49 blue:0.49 alpha:0.5].CGColor;
     
-   
+    // Invalid input mark to display if there is invalid input, not initially visible
+    self.invalidLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, screenHeight / 30 * 20, screenWidth / 2,  screenHeight/10)];
+    self.invalidLabel.text = @"Invalid Input";
+    self.invalidLabel.textColor = [UIColor blackColor];
+    self.invalidLabel.font = [UIFont systemFontOfSize:screenHeight/40];
+    self.invalidLabel.center = CGPointMake(centerX, self.addedLabel.center.y);
+    self.invalidLabel.textAlignment = NSTextAlignmentCenter;
+    self.invalidShapeLayer = [CAShapeLayer layer];
+    self.invalidShapeLayer.path = path2.CGPath;
+    self.invalidShapeLayer.fillColor = [UIColor colorWithRed:1.00 green:0.0 blue:0.0 alpha:0.5].CGColor;
+    
     
     // Background
     self.view.backgroundColor = [UIColor whiteColor];
@@ -174,18 +188,95 @@
 {
     DatabaseController *dbController = [DatabaseController sharedInstance];
     
-    self.name = self.nameField.text;
-    self.age = [self.ageField.text integerValue];
-    self.breed = self.breedField.text;
-    self.weight = [self.weightField.text integerValue];
-    NSLog(@"the name of the dog you are adding is: %@", self.nameField.text);
-    [dbController addDog:_name age:_age breed:_breed weight:_weight dateAdded:[NSDate date]];
+    NSMutableArray *sanityCheck = [NSMutableArray arrayWithObjects:@0, @0, @0, @0, nil];
     
-    self.nameField.text = @"";
-    self.ageField.text = @"";
-    self.breedField.text = @"";
-    self.weightField.text = @"";
+    // Name sanity check
+    if ([self.nameField.text length] > 12){
+        NSLog(@"Name is too long");
+    } else {
+        [sanityCheck replaceObjectAtIndex:0 withObject:@1];
+    }
     
+    // Age sanity check
+    NSCharacterSet *notNumbers = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
+    if ([self.ageField.text rangeOfCharacterFromSet:notNumbers].location != NSNotFound) {
+        NSLog(@"Age contains a character that isn't a number");
+    } else {
+        [sanityCheck replaceObjectAtIndex:1 withObject:@1];
+    }
+    
+    // Breed sanity check
+    if ([self.breedField.text stringByTrimmingCharactersInSet:notNumbers].length > 0) {
+        NSLog(@"Breed contains an illegal character");
+    } else {
+        [sanityCheck replaceObjectAtIndex:2 withObject:@1];
+    }
+    
+    // Weight sanity check
+    if ([self.weightField.text rangeOfCharacterFromSet:notNumbers].location != NSNotFound) {
+        NSLog(@"Weight contains a character that isn't a number");
+
+    } else {
+        [sanityCheck replaceObjectAtIndex:3 withObject:@1];
+    }
+    
+    NSLog(@"%@", sanityCheck);
+    // Highlights the fields with invalid inputs
+    if ([[sanityCheck objectAtIndex:0] isEqualToNumber:@0]){
+        self.nameField.layer.borderWidth = 2.0;
+        self.nameField.layer.borderColor = [UIColor redColor].CGColor;
+    }
+    if ([[sanityCheck objectAtIndex:1] isEqualToNumber:@0]){
+        self.ageField.layer.borderWidth = 2.0;
+        self.ageField.layer.borderColor = [UIColor redColor].CGColor;
+    }
+    if ([[sanityCheck objectAtIndex:2] isEqualToNumber:@0]){
+        self.breedField.layer.borderWidth = 2.0;
+        self.breedField.layer.borderColor = [UIColor redColor].CGColor;
+    }
+    if ([[sanityCheck objectAtIndex:3] isEqualToNumber:@0]){
+        self.weightField.layer.borderWidth = 2.0;
+        self.weightField.layer.borderColor = [UIColor redColor].CGColor;
+    }
+    
+    
+    // check for validity of all of the inputs to show corresponding label to the user if it's valid or invalid
+    if([sanityCheck containsObject:@0]) {
+        [self showInvalidInput];
+    } else {
+        self.name = self.nameField.text;
+        self.age = [self.ageField.text integerValue];
+        self.breed = self.breedField.text;
+        self.weight = [self.weightField.text integerValue];
+        
+        NSLog(@"the name of the dog you are adding is: %@", self.nameField.text);
+        [dbController addDog:_name age:_age breed:_breed weight:_weight dateAdded:[NSDate date]];
+        
+        self.nameField.text = @"";
+        self.ageField.text = @"";
+        self.breedField.text = @"";
+        self.weightField.text = @"";
+        
+        [self showValidInput];
+    }
+}
+
+
+// Displays message that the inputs are invalid
+- (void)showInvalidInput
+{
+    [self.view.layer addSublayer:self.invalidShapeLayer];
+    [self.view addSubview:self.invalidLabel];
+    [NSTimer scheduledTimerWithTimeInterval:3.0
+                                         target:self
+                                       selector:@selector(hideObject)
+                                       userInfo:nil
+                                        repeats:NO];
+}
+
+// Displays message that the inputs are validand the request to add the dog to the user has started
+- (void)showValidInput
+{
     [self.view.layer addSublayer:self.addedShapeLayer];
     [self.view addSubview:self.addedLabel];
     [NSTimer scheduledTimerWithTimeInterval:3.0
@@ -193,13 +284,17 @@
                                        selector:@selector(hideObject)
                                        userInfo:nil
                                         repeats:NO];
-    
 }
 
 
-- (void)hideObject {
-    // Hide the object
+- (void)hideObject
+{
+    // Hides labels to show valid or invalid input
     [self.addedLabel removeFromSuperview];
+    [self.addedShapeLayer removeFromSuperlayer];
+    
+    [self.invalidLabel removeFromSuperview];
+    [self.invalidShapeLayer removeFromSuperlayer];
 }
 
 

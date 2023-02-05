@@ -66,7 +66,7 @@
     
     // Button for View/Update
     UIButton *viewUpdateButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    [viewUpdateButton setTitle:@"View/Update" forState:UIControlStateNormal];
+    [viewUpdateButton setTitle:@"View Dogs" forState:UIControlStateNormal];
     viewUpdateButton.layer.borderWidth = 2.0;
     viewUpdateButton.layer.borderColor = [UIColor systemBrownColor].CGColor;
     viewUpdateButton.layer.backgroundColor = [UIColor whiteColor].CGColor;

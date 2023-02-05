@@ -43,7 +43,7 @@
     CGFloat labelHeight = contentBounds.size.height;
     CGFloat tableLeftAlignment = contentBounds.size.width / 20;
     
-    self.nameLabel.frame = CGRectMake(0 + tableLeftAlignment, 0, labelWidth, labelHeight);
+    self.nameLabel.frame = CGRectMake(0 + tableLeftAlignment, 0, labelWidth / 5 * 4, labelHeight);
     self.ageLabel.frame = CGRectMake(labelWidth, 0, labelWidth, labelHeight);
     self.breedLabel.frame = CGRectMake(labelWidth * 2 - tableLeftAlignment * 3, 0, labelWidth * 1.2, labelHeight);
     self.weightLabel.frame = CGRectMake(labelWidth * 3 - tableLeftAlignment, 0, labelWidth, labelHeight);
