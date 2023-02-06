@@ -13,6 +13,10 @@
 
 @property (nonatomic, strong) DatabaseController *dbController;
 
+@property (nonatomic, strong) UIScrollView *scrollView;
+@property (nonatomic, strong) UIView *contentView;
+
+
 @property (strong, nonatomic) NSString *name;
 @property (nonatomic) NSInteger age;
 @property (strong, nonatomic) NSString *breed;
@@ -21,7 +25,12 @@
 @property (strong, nonatomic) IBOutlet UITextField *nameField;
 @property (strong, nonatomic) IBOutlet UITextField *ageField;
 @property (strong, nonatomic) IBOutlet UITextField *breedField;
-@property (strong, nonatomic)IBOutlet UITextField *weightField;
+@property (strong, nonatomic) IBOutlet UITextField *weightField;
+
+@property (strong, nonatomic) IBOutlet UITextField *ownerFirstNameField;
+@property (strong, nonatomic) IBOutlet UITextField *ownerLastNameField;
+@property (strong, nonatomic) IBOutlet UITextField *ownerPhoneNumberField;
+@property (strong, nonatomic) IBOutlet UITextField *ownerEmailField;
 
 @property (strong, nonatomic) UILabel* addedLabel;
 @property (strong, nonatomic) CAShapeLayer *addedShapeLayer;
@@ -37,6 +46,7 @@
 {
     self = [super init];
     self.modalPresentationStyle = UIModalPresentationFullScreen;
+    self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
     return self;
 }
 
@@ -48,6 +58,13 @@
     CGFloat screenHeight = self.view.frame.size.height;
     CGFloat centerX = screenWidth / 2;
     CGFloat leftAlignment = screenWidth / 10;
+    
+    // Initialize scroll view and content view
+    self.scrollView = [[UIScrollView alloc] initWithFrame:self.view.bounds];
+    self.scrollView.contentSize = CGSizeMake(self.view.bounds.size.width, self.view.bounds.size.height * 1.5);
+    self.scrollView.backgroundColor = [UIColor whiteColor];
+    self.contentView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, self.view.bounds.size.height * 2.0)];
+    
     
     // Check mark to display something has been added to database, not initally visible
     self.addedLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, screenHeight / 30 * 20, screenWidth / 2,  screenHeight/10)];
@@ -71,8 +88,135 @@
     self.invalidLabel.textAlignment = NSTextAlignmentCenter;
     self.invalidShapeLayer = [CAShapeLayer layer];
     self.invalidShapeLayer.path = path2.CGPath;
-    self.invalidShapeLayer.fillColor = [UIColor colorWithRed:1.00 green:0.0 blue:0.0 alpha:0.5].CGColor;
+    self.invalidShapeLayer.fillColor = [UIColor colorWithRed:1.00 green:0.0 blue:0.0 alpha:0.75].CGColor;
     
+    
+    // Label for Name
+    UILabel *enterDogNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftAlignment, screenHeight / 20 * 2.5, screenWidth / 2,  screenHeight/10)];
+    enterDogNameLabel.text = @"Enter Dog Name";
+    enterDogNameLabel.textColor = [UIColor blackColor];
+    enterDogNameLabel.font = [UIFont systemFontOfSize:screenHeight/50];
+    enterDogNameLabel.textAlignment = NSTextAlignmentLeft;
+    [self.contentView addSubview:enterDogNameLabel];
+    
+    // Name for Dog
+    self.nameField = [[UITextField alloc] initWithFrame:CGRectMake(leftAlignment, screenHeight / 20 * 4, screenWidth / 10 * 8, screenHeight / 25)];
+    self.nameField.borderStyle = UITextBorderStyleRoundedRect;
+    self.nameField.placeholder = @"Enter Name";
+    [self.contentView addSubview:self.nameField];
+    
+    
+    // Label for Age
+    UILabel *enterDogAgeLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftAlignment, screenHeight / 20 * 4.5, screenWidth / 2,  screenHeight/10)];
+    enterDogAgeLabel.text = @"Enter Dog Age";
+    enterDogAgeLabel.textColor = [UIColor blackColor];
+    enterDogAgeLabel.font = [UIFont systemFontOfSize:screenHeight/50];
+    enterDogAgeLabel.textAlignment = NSTextAlignmentLeft;
+    [self.contentView addSubview:enterDogAgeLabel];
+    
+    // Age for Dog
+    self.ageField = [[UITextField alloc] init];
+    self.ageField.frame = CGRectMake(leftAlignment, screenHeight / 20 * 6, screenWidth / 10 * 8, screenHeight / 25);
+    self.ageField.keyboardType = UIKeyboardTypeNumberPad;
+    self.ageField.borderStyle = UITextBorderStyleRoundedRect;
+    self.ageField.placeholder = @"Enter Age";
+    [self.contentView addSubview:self.ageField];
+    
+    
+    // Label for Breed
+    UILabel *enterDogBreedLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftAlignment, screenHeight / 20 * 6.5, screenWidth / 2,  screenHeight/10)];
+    enterDogBreedLabel.text = @"Enter Dog Breed";
+    enterDogBreedLabel.textColor = [UIColor blackColor];
+    enterDogBreedLabel.font = [UIFont systemFontOfSize:screenHeight/50];
+    enterDogBreedLabel.textAlignment = NSTextAlignmentLeft;
+    [self.contentView addSubview:enterDogBreedLabel];
+    
+    // Breed for Dog
+    self.breedField = [[UITextField alloc] initWithFrame:CGRectMake(leftAlignment, screenHeight / 20 * 8, screenWidth / 10 * 8, screenHeight / 25)];
+    self.breedField.borderStyle = UITextBorderStyleRoundedRect;
+    self.breedField.placeholder = @"Enter Breed";
+    [self.contentView addSubview:self.breedField];
+    
+    
+    // Label for Weight
+    UILabel *enterDogWeightLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftAlignment, screenHeight / 20 * 8.5, screenWidth / 2,  screenHeight/10)];
+    enterDogWeightLabel.text = @"Enter Dog Weight";
+    enterDogWeightLabel.textColor = [UIColor blackColor];
+    enterDogWeightLabel.font = [UIFont systemFontOfSize:screenHeight/50];
+    enterDogWeightLabel.textAlignment = NSTextAlignmentLeft;
+    [self.contentView addSubview:enterDogWeightLabel];
+    
+    // Weight for Dog
+    self.weightField = [[UITextField alloc] init];
+    self.weightField.frame = CGRectMake(leftAlignment, screenHeight / 20 * 10, screenWidth / 10 * 8, screenHeight / 25);
+    self.weightField.keyboardType = UIKeyboardTypeNumberPad;
+    self.weightField.borderStyle = UITextBorderStyleRoundedRect;
+    self.weightField.placeholder = @"Enter Weight";
+    [self.contentView addSubview:self.weightField];
+    
+    
+    // Owner Details -------------------------------------------------------------------------------------------
+    // Label for owner name
+    UILabel *ownerNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftAlignment, screenHeight / 20 * 10.5, screenWidth / 2,  screenHeight/10)];
+    ownerNameLabel.text = @"Owner First Name";
+    ownerNameLabel.textColor = [UIColor blackColor];
+    ownerNameLabel.font = [UIFont systemFontOfSize:screenHeight/50];
+    ownerNameLabel.textAlignment = NSTextAlignmentLeft;
+    [self.contentView addSubview:ownerNameLabel];
+    // Owner First Name field
+    self.ownerFirstNameField = [[UITextField alloc] init];
+    self.ownerFirstNameField.frame = CGRectMake(leftAlignment, screenHeight / 20 * 12, screenWidth / 10 * 4, screenHeight / 25);
+    self.ownerFirstNameField.borderStyle = UITextBorderStyleRoundedRect;
+    self.ownerFirstNameField.placeholder = @"Enter First Name";
+    [self.contentView addSubview:self.ownerFirstNameField];
+    // Owner Last Name field
+    self.ownerLastNameField = [[UITextField alloc] init];
+    self.ownerLastNameField.frame = CGRectMake(leftAlignment + screenWidth / 10 * 4.1, screenHeight / 20 * 12, screenWidth / 10 * 4, screenHeight / 25);
+    self.ownerLastNameField.borderStyle = UITextBorderStyleRoundedRect;
+    self.ownerLastNameField.placeholder = @"Enter Last Name";
+    [self.contentView addSubview:self.ownerLastNameField];
+    
+    
+    // Label for phone number
+    UILabel *enterPhoneLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftAlignment, screenHeight / 20 * 12.5, screenWidth / 2,  screenHeight/10)];
+    enterPhoneLabel.text = @"Phone Number";
+    enterPhoneLabel.textColor = [UIColor blackColor];
+    enterPhoneLabel.font = [UIFont systemFontOfSize:screenHeight/50];
+    enterPhoneLabel.textAlignment = NSTextAlignmentLeft;
+    [self.contentView addSubview:enterPhoneLabel];
+    
+    // Owner Phone number field
+    self.ownerPhoneNumberField = [[UITextField alloc] init];
+    self.ownerPhoneNumberField.frame = CGRectMake(leftAlignment, screenHeight / 20 * 14, screenWidth / 10 * 8, screenHeight / 25);
+    self.ownerPhoneNumberField.keyboardType = UIKeyboardTypePhonePad;
+    self.ownerPhoneNumberField.borderStyle = UITextBorderStyleRoundedRect;
+    self.ownerPhoneNumberField.placeholder = @"Enter Phone Number";
+    [self.contentView addSubview:self.ownerPhoneNumberField];
+    
+    
+    // Label for email number
+    UILabel *enterEmailLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftAlignment, screenHeight / 20 * 14.5, screenWidth / 2,  screenHeight/10)];
+    enterEmailLabel.text = @"Email Address";
+    enterEmailLabel.textColor = [UIColor blackColor];
+    enterEmailLabel.font = [UIFont systemFontOfSize:screenHeight/50];
+    enterEmailLabel.textAlignment = NSTextAlignmentLeft;
+    [self.contentView addSubview:enterEmailLabel];
+    
+    // Owner Phone number field
+    self.ownerEmailField = [[UITextField alloc] init];
+    self.ownerEmailField.frame = CGRectMake(leftAlignment, screenHeight / 20 * 16, screenWidth / 10 * 8, screenHeight / 25);
+    self.ownerEmailField.borderStyle = UITextBorderStyleRoundedRect;
+    self.ownerEmailField.placeholder = @"Enter Email Address";
+    [self.contentView addSubview:self.ownerEmailField];
+    
+    // Gestures
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+        [self.contentView addGestureRecognizer:tap];
+    
+    self.scrollView.contentSize = self.contentView.bounds.size;
+    [self.scrollView addSubview:self.contentView];
+    [self.view addSubview:self.scrollView];
+     
     
     // Background
     self.view.backgroundColor = [UIColor whiteColor];
@@ -117,70 +261,6 @@
     titleLabel.center = CGPointMake(centerX, titleLabel.center.y);
     titleLabel.textAlignment = NSTextAlignmentCenter;
     [self.view addSubview:titleLabel];
-    
-    
-    // Label for Name
-    UILabel *enterDogNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftAlignment, screenHeight / 20 * 2.5, screenWidth / 2,  screenHeight/10)];
-    enterDogNameLabel.text = @"Enter Dog Name";
-    enterDogNameLabel.textColor = [UIColor blackColor];
-    enterDogNameLabel.font = [UIFont systemFontOfSize:screenHeight/50];
-    enterDogNameLabel.textAlignment = NSTextAlignmentLeft;
-    [self.view addSubview:enterDogNameLabel];
-    
-    // Name for Dog
-    self.nameField = [[UITextField alloc] initWithFrame:CGRectMake(leftAlignment, screenHeight / 20 * 4, screenWidth / 10 * 8, screenHeight / 25)];
-    self.nameField.borderStyle = UITextBorderStyleRoundedRect;
-    self.nameField.placeholder = @"Enter Name";
-    [self.view addSubview:self.nameField];
-    
-    
-    // Label for Age
-    UILabel *enterDogAgeLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftAlignment, screenHeight / 20 * 4.5, screenWidth / 2,  screenHeight/10)];
-    enterDogAgeLabel.text = @"Enter Dog Age";
-    enterDogAgeLabel.textColor = [UIColor blackColor];
-    enterDogAgeLabel.font = [UIFont systemFontOfSize:screenHeight/50];
-    enterDogAgeLabel.textAlignment = NSTextAlignmentLeft;
-    [self.view addSubview:enterDogAgeLabel];
-    
-    // Age for Dog
-    self.ageField = [[UITextField alloc] init];
-    self.ageField.frame = CGRectMake(leftAlignment, screenHeight / 20 * 6, screenWidth / 10 * 8, screenHeight / 25);
-    self.ageField.keyboardType = UIKeyboardTypeNumberPad;
-    self.ageField.borderStyle = UITextBorderStyleRoundedRect;
-    self.ageField.placeholder = @"Enter Age";
-    [self.view addSubview:self.ageField];
-    
-    
-    // Label for Breed
-    UILabel *enterDogBreedLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftAlignment, screenHeight / 20 * 6.5, screenWidth / 2,  screenHeight/10)];
-    enterDogBreedLabel.text = @"Enter Dog Breed";
-    enterDogBreedLabel.textColor = [UIColor blackColor];
-    enterDogBreedLabel.font = [UIFont systemFontOfSize:screenHeight/50];
-    enterDogBreedLabel.textAlignment = NSTextAlignmentLeft;
-    [self.view addSubview:enterDogBreedLabel];
-    
-    // Breed for Dog
-    self.breedField = [[UITextField alloc] initWithFrame:CGRectMake(leftAlignment, screenHeight / 20 * 8, screenWidth / 10 * 8, screenHeight / 25)];
-    self.breedField.borderStyle = UITextBorderStyleRoundedRect;
-    self.breedField.placeholder = @"Enter Breed";
-    [self.view addSubview:self.breedField];
-    
-    
-    // Label for Weight
-    UILabel *enterDogWeightLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftAlignment, screenHeight / 20 * 8.5, screenWidth / 2,  screenHeight/10)];
-    enterDogWeightLabel.text = @"Enter Dog Weight";
-    enterDogWeightLabel.textColor = [UIColor blackColor];
-    enterDogWeightLabel.font = [UIFont systemFontOfSize:screenHeight/50];
-    enterDogWeightLabel.textAlignment = NSTextAlignmentLeft;
-    [self.view addSubview:enterDogWeightLabel];
-    
-    // Weight for Dog
-    self.weightField = [[UITextField alloc] init];
-    self.weightField.frame = CGRectMake(leftAlignment, screenHeight / 20 * 10, screenWidth / 10 * 8, screenHeight / 25);
-    self.weightField.keyboardType = UIKeyboardTypeNumberPad;
-    self.weightField.borderStyle = UITextBorderStyleRoundedRect;
-    self.weightField.placeholder = @"Enter Weight";
-    [self.view addSubview:self.weightField];
 }
 
 
@@ -190,30 +270,30 @@
     
     NSMutableArray *sanityCheck = [NSMutableArray arrayWithObjects:@0, @0, @0, @0, nil];
     
-    // Name sanity check
-    if ([self.nameField.text length] > 12){
-        NSLog(@"Name is too long");
+    // Name sanity check... Name needs to be more than 0 characters long and less than 12 characters long
+    if ([self.nameField.text length] > 12 || [self.nameField.text length] == 0){
+        NSLog(@"Name is too long or empty");
     } else {
         [sanityCheck replaceObjectAtIndex:0 withObject:@1];
     }
     
-    // Age sanity check
+    // Age sanity check... ageField needs to contain only numbers and not empty
     NSCharacterSet *notNumbers = [[NSCharacterSet decimalDigitCharacterSet] invertedSet];
-    if ([self.ageField.text rangeOfCharacterFromSet:notNumbers].location != NSNotFound) {
-        NSLog(@"Age contains a character that isn't a number");
+    if ([self.ageField.text rangeOfCharacterFromSet:notNumbers].location != NSNotFound || [self.ageField.text length] == 0) {
+        NSLog(@"Age contains a character that isn't a number ir empty");
     } else {
         [sanityCheck replaceObjectAtIndex:1 withObject:@1];
     }
     
-    // Breed sanity check
-    if ([self.breedField.text stringByTrimmingCharactersInSet:notNumbers].length > 0) {
-        NSLog(@"Breed contains an illegal character");
+    // Breed sanity check... breedField needs contain only numbers and have more than 0 characters
+    if ([self.breedField.text stringByTrimmingCharactersInSet:notNumbers].length > 0 || [self.breedField.text length] == 0) {
+        NSLog(@"Breed contains an illegal character or empty");
     } else {
         [sanityCheck replaceObjectAtIndex:2 withObject:@1];
     }
     
-    // Weight sanity check
-    if ([self.weightField.text rangeOfCharacterFromSet:notNumbers].location != NSNotFound) {
+    // Weight sanity check... weightField needs to contain only numbers and not empty
+    if ([self.weightField.text rangeOfCharacterFromSet:notNumbers].location != NSNotFound || [self.weightField.text length] == 0) {
         NSLog(@"Weight contains a character that isn't a number");
 
     } else {
@@ -295,6 +375,12 @@
     
     [self.invalidLabel removeFromSuperview];
     [self.invalidShapeLayer removeFromSuperlayer];
+}
+
+
+
+- (void)dismissKeyboard {
+    [self.contentView endEditing:YES];
 }
 
 

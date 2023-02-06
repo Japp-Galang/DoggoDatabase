@@ -17,6 +17,7 @@
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
     if (self) {
         
+
         self.nameLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.ageLabel = [[UILabel alloc] initWithFrame:CGRectZero];
         self.weightLabel = [[UILabel alloc] initWithFrame:CGRectZero];
@@ -28,7 +29,7 @@
         [self.contentView addSubview:self.ageLabel];
         [self.contentView addSubview:self.breedLabel];
         [self.contentView addSubview:self.weightLabel];
-        
+
         [self.contentView addSubview:self.editButton];
     }
     return self;

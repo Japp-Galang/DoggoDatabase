@@ -44,7 +44,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
-  
+    self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
     
     CGFloat alignmentConstant = self.view.frame.size.width / 20;
     
@@ -203,6 +203,11 @@
     [viewImagesButton setTitleColor:[UIColor systemBlueColor] forState:UIControlStateNormal];
     [viewImagesButton addTarget:self action:@selector(goToViewImagesView:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:viewImagesButton];
+    
+    
+    // Gestures
+    UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(dismissKeyboard)];
+        [self.view addGestureRecognizer:tap];
 }
 
 
@@ -307,6 +312,11 @@
     
 }
 
+
+
+- (void)dismissKeyboard {
+    [self.view endEditing:YES];
+}
 
 
 @end

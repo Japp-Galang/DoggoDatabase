@@ -35,6 +35,7 @@
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
     CGRect tableViewFrame = CGRectMake(0, self.view.frame.size.height / 30 * 6, self.view.frame.size.width, self.view.frame.size.height);
     DatabaseController *dbController = [DatabaseController sharedInstance];
     

@@ -37,7 +37,8 @@
 {
     self = [super init];
     self.modalPresentationStyle = UIModalPresentationFullScreen;
-    
+    self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+
     return self;
 }
 
