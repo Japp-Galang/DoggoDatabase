@@ -14,8 +14,13 @@
 @interface ViewUpdateController () <UITableViewDataSource, UITableViewDelegate>
 
 @property (nonatomic, strong) DatabaseController *dbController;
+
+
 @property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) NSArray *dataArray;
+
+@property (nonatomic, strong) UIButton *titleButton;
+
 
 @end
 
@@ -36,6 +41,10 @@
 {
     [super viewDidLoad];
     self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
+    
+
+   
+    
     CGRect tableViewFrame = CGRectMake(0, self.view.frame.size.height / 30 * 6, self.view.frame.size.width, self.view.frame.size.height);
     DatabaseController *dbController = [DatabaseController sharedInstance];
     
@@ -79,13 +88,24 @@
     
     
     // Title
-    UILabel *titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, self.view.frame.size.height / 30 * 1.75, self.view.frame.size.width / 2,  self.view.frame.size.height/10)];
-    titleLabel.text = @"Dogs";
-    titleLabel.textColor = [UIColor whiteColor];
-    titleLabel.font = [UIFont systemFontOfSize:self.view.frame.size.height/20];
-    titleLabel.center = CGPointMake(centerX, titleLabel.center.y);
-    titleLabel.textAlignment = NSTextAlignmentCenter;
-    [self.view addSubview:titleLabel];
+    /*
+    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, self.view.frame.size.height / 30 * 1.75, self.view.frame.size.width / 2,  self.view.frame.size.height/10)];
+    self.titleLabel.text = @"Dogs";
+    self.titleLabel.textColor = [UIColor whiteColor];
+    self.titleLabel.font = [UIFont systemFontOfSize:self.view.frame.size.height/20];
+    self.titleLabel.center = CGPointMake(centerX, self.titleLabel.center.y);
+    self.titleLabel.textAlignment = NSTextAlignmentCenter;
+    [self.titleLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelTapped)]];
+    [self.view addSubview:self.titleLabel];
+    */
+    self.titleButton = [UIButton buttonWithType:UIButtonTypeSystem];
+    self.titleButton.frame = CGRectMake(100, self.view.frame.size.height / 30 * 1.75, self.view.frame.size.width / 2,  self.view.frame.size.height/10);
+    self.titleButton.center = CGPointMake(centerX, self.titleButton.center.y);
+    self.titleButton.titleLabel.font = [UIFont boldSystemFontOfSize:self.view.frame.size.height/20];
+    [self.titleButton setTitle:@"Dogs" forState:UIControlStateNormal];
+    [self.titleButton addTarget:self action:@selector(buttonTapped) forControlEvents:UIControlEventTouchUpInside];
+    [self.titleButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.view addSubview:self.titleButton];
     
     // Genres
     // Name
@@ -124,19 +144,7 @@
 }
 
 
-- (void)updateValues
-{
-    DatabaseController *dbController = [DatabaseController sharedInstance];
-    
-    self.dataArray = [dbController getAllDogs];
-    [self.tableView reloadData];
-    CGRect tableViewFrame = CGRectMake(0, self.view.frame.size.height / 30 * 6, self.view.frame.size.width, self.view.frame.size.height);
-    self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame];
-    self.tableView.dataSource = self;
-    [self.tableView registerClass:[MyTableViewCell class] forCellReuseIdentifier:@"MyCell"];
-    [self.view addSubview:self.tableView];
-    NSLog(@"Passed Through viewDidAppear");
-}
+
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
@@ -169,10 +177,52 @@
 }
 
 
+#pragma mark - for switching entity views
+- (void)buttonTapped {
+    
+    
+    if([self.titleButton.titleLabel.text  isEqual: @"Dogs"]){
+        // switching from Owners to Dogs
+        [self.titleButton setTitle:@"Owner" forState:UIControlStateNormal];
+        [self.tableView removeFromSuperview];
+        
+        self.view.backgroundColor = [UIColor systemBlueColor];
+    } else {
+        // switching from Dogs to Owners
+        [self.titleButton setTitle:@"Dogs" forState:UIControlStateNormal];
+        
+        [self.view addSubview:self.tableView];
+        self.view.backgroundColor = [UIColor systemBrownColor];
+        
+    }
+    
+}
+
+
+
+
+
+#pragma mark - actions for top buttons
 
 -(IBAction)back:(id)sender
 {
     [self dismissViewControllerAnimated:YES completion:nil];
 }
+
+
+- (void)updateValues
+{
+    DatabaseController *dbController = [DatabaseController sharedInstance];
+    
+    self.dataArray = [dbController getAllDogs];
+    [self.tableView reloadData];
+    CGRect tableViewFrame = CGRectMake(0, self.view.frame.size.height / 30 * 6, self.view.frame.size.width, self.view.frame.size.height);
+    self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame];
+    self.tableView.dataSource = self;
+    [self.tableView registerClass:[MyTableViewCell class] forCellReuseIdentifier:@"MyCell"];
+    [self.view addSubview:self.tableView];
+    NSLog(@"Passed Through viewDidAppear");
+}
+
 
 @end

@@ -32,7 +32,6 @@
 @property (strong, nonatomic) UILabel *breedLabel;
 @property (strong, nonatomic) UILabel *weightLabel;
 
-
 @property (nonatomic, strong) ViewUpdateController *previousView;
 
 @end

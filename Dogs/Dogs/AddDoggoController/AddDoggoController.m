@@ -155,7 +155,7 @@
     [self.contentView addSubview:self.weightField];
     
     
-    // Owner Details -------------------------------------------------------------------------------------------
+#pragma mark - Owner details
     // Label for owner name
     UILabel *ownerNameLabel = [[UILabel alloc] initWithFrame:CGRectMake(leftAlignment, screenHeight / 20 * 10.5, screenWidth / 2,  screenHeight/10)];
     ownerNameLabel.text = @"Owner First Name";
@@ -264,10 +264,12 @@
 }
 
 
+
 - (IBAction)saveDog:(id)sender
 {
     DatabaseController *dbController = [DatabaseController sharedInstance];
     
+#pragma mark - Sanity check for inputs in fields
     NSMutableArray *sanityCheck = [NSMutableArray arrayWithObjects:@0, @0, @0, @0, nil];
     
     // Name sanity check... Name needs to be more than 0 characters long and less than 12 characters long
@@ -367,9 +369,13 @@
 }
 
 
+
+/*
+Hides labels to show valid or invalid input
+ */
 - (void)hideObject
 {
-    // Hides labels to show valid or invalid input
+
     [self.addedLabel removeFromSuperview];
     [self.addedShapeLayer removeFromSuperlayer];
     
