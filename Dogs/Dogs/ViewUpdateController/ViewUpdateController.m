@@ -8,7 +8,7 @@
 #import <Foundation/Foundation.h>
 #import "ViewUpdateController.h"
 #import "DatabaseController.h"
-#import "MyTableViewCell.h"
+#import "DogViewCell.h"
 
 
 @interface ViewUpdateController () <UITableViewDataSource, UITableViewDelegate>
@@ -16,8 +16,13 @@
 @property (nonatomic, strong) DatabaseController *dbController;
 
 
-@property (nonatomic, strong) UITableView *tableView;
-@property (nonatomic, strong) NSArray *dataArray;
+@property (nonatomic, strong) UITableView *dogsTableView;
+@property (nonatomic, strong) NSArray *dogsDataArray;
+@property (nonatomic) UIView *dogColumns;
+
+@property (nonatomic, strong) UITableView *ownersTableView;
+@property (nonatomic, strong) NSArray *ownersDataArray;
+@property (nonatomic) UIView *ownersColumns;
 
 @property (nonatomic, strong) UIButton *titleButton;
 
@@ -42,158 +47,179 @@
     [super viewDidLoad];
     self.overrideUserInterfaceStyle = UIUserInterfaceStyleLight;
     
-
-   
+    // Screen constants
+    CGFloat screenWidth = self.view.frame.size.width;
+    CGFloat screenHeight = self.view.frame.size.height;
+    CGFloat centerX = screenWidth / 2;
+    CGFloat alignmentConstant = screenWidth / 20;
+    CGFloat labelWidth = screenWidth / 4;
+    CGRect tableViewFrame = CGRectMake(0, screenHeight / 30 * 6, screenWidth, screenHeight);
     
-    CGRect tableViewFrame = CGRectMake(0, self.view.frame.size.height / 30 * 6, self.view.frame.size.width, self.view.frame.size.height);
     DatabaseController *dbController = [DatabaseController sharedInstance];
     
-    self.dataArray = [dbController getAllDogs];
-    [self.tableView reloadData];
-    self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame];
-    self.tableView.dataSource = self;
-    [self.tableView registerClass:[MyTableViewCell class] forCellReuseIdentifier:@"MyCell"];
-    [self.view addSubview:self.tableView];
+    // Table data initialization
+    // initialize tableView for dogs
+    self.dogsDataArray = [dbController getAllDogs];
+    [self.dogsTableView reloadData];
+    self.dogsTableView = [[UITableView alloc] initWithFrame:tableViewFrame];
+    self.dogsTableView.dataSource = self;
+    [self.dogsTableView registerClass:[DogViewCell class] forCellReuseIdentifier:@"DogCell"];
+    [self.view addSubview:self.dogsTableView];
     
     
-    CGFloat centerX = self.view.frame.size.width / 2;
-    
-    CGFloat alignmentConstant = self.view.frame.size.width / 20;
-    CGFloat labelWidth = self.view.frame.size.width / 4;
     
     // Background
     self.view.backgroundColor = [UIColor systemBrownColor];
     
     
+//Navigation Menu items
     // Back Button
     UIButton *backButton = [UIButton buttonWithType:UIButtonTypeSystem];
     [backButton setTitle:@"Back" forState:UIControlStateNormal];
-   
     backButton.layer.borderWidth = 1.0;
     backButton.layer.borderColor = [UIColor whiteColor].CGColor;
     backButton.layer.cornerRadius = 15.0;
-    backButton.frame = CGRectMake(self.view.frame.size.width / 15, self.view.frame.size.height / 24 * 2, self.view.frame.size.width / 6, self.view.frame.size.height/20);
-    backButton.titleLabel.font = [UIFont boldSystemFontOfSize:self.view.frame.size.height/50];
+    backButton.frame = CGRectMake(screenWidth / 15, screenHeight / 24 * 2, screenWidth / 6, screenHeight/20);
+    backButton.titleLabel.font = [UIFont boldSystemFontOfSize:screenHeight/50];
     [backButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [backButton addTarget:self action:@selector(back:) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:backButton];
     
-    
     // Refresh Button
     UIButton *refreshButton = [UIButton buttonWithType:UIButtonTypeCustom];
     [refreshButton setImage:[UIImage imageNamed:@"refreshIcon"] forState:UIControlStateNormal];
-    refreshButton.frame = CGRectMake(self.view.frame.size.width / 15 * 12,self.view.frame.size.height / 24 * 2.2, self.view.frame.size.width / 12, self.view.frame.size.height/30);
+    refreshButton.frame = CGRectMake(screenWidth / 15 * 12,screenHeight / 24 * 2.2, screenWidth / 12, screenHeight/30);
     [refreshButton addTarget:self action:@selector(updateValues) forControlEvents:UIControlEventTouchUpInside];
     [self.view addSubview:refreshButton];
     
-    
-    // Title
-    /*
-    self.titleLabel = [[UILabel alloc] initWithFrame:CGRectMake(100, self.view.frame.size.height / 30 * 1.75, self.view.frame.size.width / 2,  self.view.frame.size.height/10)];
-    self.titleLabel.text = @"Dogs";
-    self.titleLabel.textColor = [UIColor whiteColor];
-    self.titleLabel.font = [UIFont systemFontOfSize:self.view.frame.size.height/20];
-    self.titleLabel.center = CGPointMake(centerX, self.titleLabel.center.y);
-    self.titleLabel.textAlignment = NSTextAlignmentCenter;
-    [self.titleLabel addGestureRecognizer:[[UITapGestureRecognizer alloc] initWithTarget:self action:@selector(labelTapped)]];
-    [self.view addSubview:self.titleLabel];
-    */
+    // Title (toggles on tap between Dogs or Owners)
     self.titleButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    self.titleButton.frame = CGRectMake(100, self.view.frame.size.height / 30 * 1.75, self.view.frame.size.width / 2,  self.view.frame.size.height/10);
+    self.titleButton.frame = CGRectMake(100, screenHeight / 30 * 1.75, screenWidth / 2,  screenHeight/10);
     self.titleButton.center = CGPointMake(centerX, self.titleButton.center.y);
-    self.titleButton.titleLabel.font = [UIFont boldSystemFontOfSize:self.view.frame.size.height/20];
+    self.titleButton.titleLabel.font = [UIFont boldSystemFontOfSize:screenHeight/20];
     [self.titleButton setTitle:@"Dogs" forState:UIControlStateNormal];
     [self.titleButton addTarget:self action:@selector(buttonTapped) forControlEvents:UIControlEventTouchUpInside];
     [self.titleButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
     [self.view addSubview:self.titleButton];
     
-    // Genres
+    
+// initialize column names for dogs and owners
+    CGRect frame = CGRectMake(0, 0 , screenWidth,  screenHeight);
+    self.dogColumns = [[UIView alloc] initWithFrame:frame];
+    self.dogColumns.userInteractionEnabled = NO;
+    // Dog Columns
     // Name
-    UILabel *nameGenreLabel = [[UILabel alloc] initWithFrame:CGRectMake(0 + alignmentConstant, self.view.frame.size.height / 30 * 4 , self.view.frame.size.width / 4,  self.view.frame.size.height/10)];
+    UILabel *nameGenreLabel = [[UILabel alloc] initWithFrame:CGRectMake(0 + alignmentConstant, screenHeight / 30 * 4 , screenWidth / 4,  screenHeight/10)];
     nameGenreLabel.text = @"Name";
     nameGenreLabel.textColor = [UIColor whiteColor];
-    nameGenreLabel.font = [UIFont boldSystemFontOfSize:self.view.frame.size.height/50];
+    nameGenreLabel.font = [UIFont boldSystemFontOfSize:screenHeight/50];
     nameGenreLabel.textAlignment = NSTextAlignmentLeft;
-    [self.view addSubview:nameGenreLabel];
+    [self.dogColumns addSubview:nameGenreLabel];
     
     // Age
-    UILabel *ageGenreLabel = [[UILabel alloc] initWithFrame:CGRectMake(labelWidth, self.view.frame.size.height / 30 * 4 , self.view.frame.size.width / 4,  self.view.frame.size.height/10)];
+    UILabel *ageGenreLabel = [[UILabel alloc] initWithFrame:CGRectMake(labelWidth, screenHeight / 30 * 4 , screenWidth / 4,  screenHeight/10)];
     ageGenreLabel.text = @"Age";
     ageGenreLabel.textColor = [UIColor whiteColor];
-    ageGenreLabel.font = [UIFont boldSystemFontOfSize:self.view.frame.size.height/50];
+    ageGenreLabel.font = [UIFont boldSystemFontOfSize:screenHeight/50];
     ageGenreLabel.textAlignment = NSTextAlignmentLeft;
-    [self.view addSubview:ageGenreLabel];
-    
+    [self.dogColumns addSubview:ageGenreLabel];
     
     // Breed
-    UILabel *breedGenreLabel = [[UILabel alloc] initWithFrame:CGRectMake(labelWidth * 2 - alignmentConstant * 3, self.view.frame.size.height / 30 * 4 , self.view.frame.size.width / 4,  self.view.frame.size.height/10)];
+    UILabel *breedGenreLabel = [[UILabel alloc] initWithFrame:CGRectMake(labelWidth * 2 - alignmentConstant * 3, screenHeight / 30 * 4 , screenWidth / 4,  screenHeight/10)];
     breedGenreLabel.text = @"Breed";
     breedGenreLabel.textColor = [UIColor whiteColor];
-    breedGenreLabel.font = [UIFont boldSystemFontOfSize:self.view.frame.size.height/50];
+    breedGenreLabel.font = [UIFont boldSystemFontOfSize:screenHeight/50];
     breedGenreLabel.textAlignment = NSTextAlignmentLeft;
-    [self.view addSubview:breedGenreLabel];
-    
+    [self.dogColumns addSubview:breedGenreLabel];
     
     // Weight
-    UILabel *weightGenreLabel = [[UILabel alloc] initWithFrame:CGRectMake(labelWidth * 3 - alignmentConstant, self.view.frame.size.height / 30 * 4 , self.view.frame.size.width / 4,  self.view.frame.size.height/10)];
+    UILabel *weightGenreLabel = [[UILabel alloc] initWithFrame:CGRectMake(labelWidth * 3 - alignmentConstant, screenHeight / 30 * 4 , screenWidth / 4, screenHeight / 10)];
     weightGenreLabel.text = @"Weight (lbs)";
     weightGenreLabel.textColor = [UIColor whiteColor];
-    weightGenreLabel.font = [UIFont boldSystemFontOfSize:self.view.frame.size.height/50];
+    weightGenreLabel.font = [UIFont boldSystemFontOfSize:screenHeight/50];
     weightGenreLabel.textAlignment = NSTextAlignmentLeft;
-    [self.view addSubview:weightGenreLabel];
+    [self.dogColumns addSubview:weightGenreLabel];
+    
+    [self.view addSubview:self.dogColumns];
+    
+    // Owner Columns
+    
+    
 }
-
 
 
 
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    return self.dataArray.count;
+    return self.dogsDataArray.count;
 }
 
 
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *CellIdentifier = @"MyCell";
-    MyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if (!cell) {
-        cell = [[MyTableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    if([self.titleButton.titleLabel.text isEqualToString: @"Dogs"]){
+        static NSString *CellIdentifier = @"DogCell";
+        DogViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[DogViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        NSDictionary *dogDict = self.dogsDataArray[indexPath.row];
+        
+        cell.ident = [NSString stringWithFormat:@"%@", dogDict[@"ID"]];
+        cell.nameLabel.text = dogDict[@"name"];
+        cell.ageLabel.text = [NSString stringWithFormat:@"%@", dogDict[@"age"]];
+        cell.weightLabel.text = [NSString stringWithFormat:@"%@", dogDict[@"weight"]];
+        cell.breedLabel.text = dogDict[@"breed"];
+        cell.dateAdded = dogDict[@"dateAdded"];
+        
+        cell.parentViewController = self;
+        return cell;
+    } else {
+        static NSString *CellIdentifier = @"DogCell";
+        DogViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+        if (!cell) {
+            cell = [[DogViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+        }
+        NSLog(@"Not Dogs");
+        return cell;
     }
-    NSDictionary *dogDict = self.dataArray[indexPath.row];
     
-    cell.ident = [NSString stringWithFormat:@"%@", dogDict[@"ID"]];
-    cell.nameLabel.text = dogDict[@"name"];
-    cell.ageLabel.text = [NSString stringWithFormat:@"%@", dogDict[@"age"]];
-    cell.weightLabel.text = [NSString stringWithFormat:@"%@", dogDict[@"weight"]];
-    cell.breedLabel.text = dogDict[@"breed"];
-    cell.dateAdded = dogDict[@"dateAdded"];
-    
-    cell.parentViewController = self;
-    
-    
-    return cell;
 }
 
 
-#pragma mark - for switching entity views
-- (void)buttonTapped {
-    
-    
-    if([self.titleButton.titleLabel.text  isEqual: @"Dogs"]){
+#pragma mark - for switching entity views (Dogs or Owners)
+- (void)buttonTapped
+{
+    if([self.titleButton.titleLabel.text isEqualToString: @"Dogs"]){
         // switching from Owners to Dogs
-        [self.titleButton setTitle:@"Owner" forState:UIControlStateNormal];
-        [self.tableView removeFromSuperview];
         
+        // Adding compononents for Owner
         self.view.backgroundColor = [UIColor systemBlueColor];
+        [self.titleButton setTitle:@"Owners" forState:UIControlStateNormal];
+        // - Need to implement ownerTableView
+        // - Need to implement ownerColumns
+        
+        // Removing components of Dog
+        [self.dogsTableView removeFromSuperview];
+        [self.dogColumns removeFromSuperview];
+        
+        
     } else {
         // switching from Dogs to Owners
-        [self.titleButton setTitle:@"Dogs" forState:UIControlStateNormal];
         
-        [self.view addSubview:self.tableView];
+        
+        // Adding Components for Dog
         self.view.backgroundColor = [UIColor systemBrownColor];
+        [self.titleButton setTitle:@"Dogs" forState:UIControlStateNormal];
+        [self.view addSubview:self.dogsTableView];
+        [self.view addSubview:self.dogColumns];
         
+        
+        // Removing components of Owner
+        // - Remove ownerTableView from superView
+        // - Remove ownerColumns from superView
     }
     
 }
@@ -210,17 +236,18 @@
 }
 
 
+
 - (void)updateValues
 {
     DatabaseController *dbController = [DatabaseController sharedInstance];
     
-    self.dataArray = [dbController getAllDogs];
-    [self.tableView reloadData];
+    self.dogsDataArray = [dbController getAllDogs];
+    [self.dogsTableView reloadData];
     CGRect tableViewFrame = CGRectMake(0, self.view.frame.size.height / 30 * 6, self.view.frame.size.width, self.view.frame.size.height);
-    self.tableView = [[UITableView alloc] initWithFrame:tableViewFrame];
-    self.tableView.dataSource = self;
-    [self.tableView registerClass:[MyTableViewCell class] forCellReuseIdentifier:@"MyCell"];
-    [self.view addSubview:self.tableView];
+    self.dogsTableView = [[UITableView alloc] initWithFrame:tableViewFrame];
+    self.dogsTableView.dataSource = self;
+    [self.dogsTableView registerClass:[DogViewCell class] forCellReuseIdentifier:@"DogCell"];
+    [self.view addSubview:self.dogsTableView];
     NSLog(@"Passed Through viewDidAppear");
 }
 

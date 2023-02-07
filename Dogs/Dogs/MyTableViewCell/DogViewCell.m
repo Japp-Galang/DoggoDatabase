@@ -5,12 +5,12 @@
 //  Created by Japp Galang on 1/31/23.
 //
 
-#import "MyTableViewCell.h"
+#import "DogViewCell.h"
 #import "CustomRowController.h"
 
 
 
-@implementation MyTableViewCell
+@implementation DogViewCell
 
 - (instancetype)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {

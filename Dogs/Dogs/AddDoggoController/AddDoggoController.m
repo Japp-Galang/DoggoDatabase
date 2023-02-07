@@ -269,7 +269,9 @@
 {
     DatabaseController *dbController = [DatabaseController sharedInstance];
     
-#pragma mark - Sanity check for inputs in fields
+    [self dismissKeyboard];
+    
+    // Sanity Checks for inputs
     NSMutableArray *sanityCheck = [NSMutableArray arrayWithObjects:@0, @0, @0, @0, nil];
     
     // Name sanity check... Name needs to be more than 0 characters long and less than 12 characters long

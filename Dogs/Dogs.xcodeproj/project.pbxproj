@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		DD44FC4B298978F100ABB169 /* MyTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DD44FC4A298978F100ABB169 /* MyTableViewCell.m */; };
+		DD44FC4B298978F100ABB169 /* DogViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = DD44FC4A298978F100ABB169 /* DogViewCell.m */; };
 		DD44FC522989AB0A00ABB169 /* CustomRowController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD44FC512989AB0A00ABB169 /* CustomRowController.m */; };
 		DD4F839C2986074E00C4C268 /* ViewUpdateController.m in Sources */ = {isa = PBXBuildFile; fileRef = DD4F839B2986074E00C4C268 /* ViewUpdateController.m */; };
 		DDF1A24C298B75CF0088AC75 /* ViewImagesController.m in Sources */ = {isa = PBXBuildFile; fileRef = DDF1A24B298B75CF0088AC75 /* ViewImagesController.m */; };
@@ -25,8 +25,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		DD44FC49298978F100ABB169 /* MyTableViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MyTableViewCell.h; sourceTree = "<group>"; };
-		DD44FC4A298978F100ABB169 /* MyTableViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MyTableViewCell.m; sourceTree = "<group>"; };
+		DD44FC49298978F100ABB169 /* DogViewCell.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DogViewCell.h; sourceTree = "<group>"; };
+		DD44FC4A298978F100ABB169 /* DogViewCell.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DogViewCell.m; sourceTree = "<group>"; };
 		DD44FC4F2989AAAB00ABB169 /* CustomRowController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CustomRowController.h; sourceTree = "<group>"; };
 		DD44FC512989AB0A00ABB169 /* CustomRowController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CustomRowController.m; sourceTree = "<group>"; };
 		DD4F839B2986074E00C4C268 /* ViewUpdateController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewUpdateController.m; sourceTree = "<group>"; };
@@ -67,8 +67,8 @@
 		DD44FC4C29899A8900ABB169 /* MyTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				DD44FC49298978F100ABB169 /* MyTableViewCell.h */,
-				DD44FC4A298978F100ABB169 /* MyTableViewCell.m */,
+				DD44FC49298978F100ABB169 /* DogViewCell.h */,
+				DD44FC4A298978F100ABB169 /* DogViewCell.m */,
 			);
 			path = MyTableViewCell;
 			sourceTree = "<group>";
@@ -247,7 +247,7 @@
 				DDF49D402984E5B900A50EA7 /* main.m in Sources */,
 				DDF49D322984E5B800A50EA7 /* ViewController.m in Sources */,
 				DDF1A24C298B75CF0088AC75 /* ViewImagesController.m in Sources */,
-				DD44FC4B298978F100ABB169 /* MyTableViewCell.m in Sources */,
+				DD44FC4B298978F100ABB169 /* DogViewCell.m in Sources */,
 				DD4F839C2986074E00C4C268 /* ViewUpdateController.m in Sources */,
 				DDF6CB09298720B500FA6780 /* AddDoggoController.m in Sources */,
 				DDF49D2C2984E5B800A50EA7 /* AppDelegate.m in Sources */,

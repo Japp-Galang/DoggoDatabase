@@ -158,6 +158,7 @@
 
 
 
+#pragma mark - Modifies button as needed when clicked and modifies view based on which button is clicked
 /*
  Changes the image to the previous image
  Unavailable action if selector is all the way to the left (selectedImageIndex = 0)
@@ -167,13 +168,22 @@
     CGFloat centerX = self.view.frame.size.width / 2;
     
     self.selectedImageIndex = self.selectedImageIndex - 1;
+    
     if (self.selectedImageIndex == 0){
         self.previousButton.layer.backgroundColor = [UIColor grayColor].CGColor;
-        self.previousButton.userInteractionEnabled = NO;
+        self.previousButton.userInteractionEnabled = NO; // Doesn't work, added sanity check for safety
+        
     }
     
     self.nextButton.layer.backgroundColor = [UIColor systemBrownColor].CGColor;
     self.nextButton.userInteractionEnabled = YES;
+    
+    // Sanity Check for accidental multiple presses
+    if(self.selectedImageIndex < 0){
+        self.selectedImageIndex = 0;
+        
+    }
+    
     
     // Reloads previous image to view
     UIImage *image = [UIImage imageWithData:self.dogData[self.selectedImageIndex][@"imageData"]];
@@ -183,6 +193,7 @@
     self.currentImageView.frame = CGRectMake(0, self.view.frame.size.height / 7 * 1.01, self.imageWidth, self.imageHeight);
     self.currentImageView.center = CGPointMake(centerX, self.currentImageView.center.y);
     [self.view addSubview:self.currentImageView];
+    NSLog(@"%ld", (long)self.selectedImageIndex);
      
 }
 
@@ -196,14 +207,22 @@
 {
     CGFloat centerX = self.view.frame.size.width / 2;
     
+    
+    
     self.selectedImageIndex = self.selectedImageIndex + 1;
     if (self.selectedImageIndex == self.lastImageIndex){
         self.nextButton.layer.backgroundColor = [UIColor grayColor].CGColor;
-        self.nextButton.userInteractionEnabled = NO;
+        self.nextButton.userInteractionEnabled = NO; // Doesn't work, added sanity check for safety
     }
 
     self.previousButton.layer.backgroundColor = [UIColor systemBrownColor].CGColor;
     self.previousButton.userInteractionEnabled = YES;
+    
+    // Sanity Check for accidental multiple presses
+    if(self.selectedImageIndex > self.lastImageIndex){
+        self.selectedImageIndex = self.lastImageIndex;
+        
+    }
     
     // Reloads next image to view
     UIImage *image = [UIImage imageWithData:self.dogData[self.selectedImageIndex][@"imageData"]];
@@ -213,6 +232,9 @@
     self.currentImageView.frame = CGRectMake(0, self.view.frame.size.height / 7 * 1.01, self.imageWidth, self.imageHeight);
     self.currentImageView.center = CGPointMake(centerX, self.currentImageView.center.y);
     [self.view addSubview:self.currentImageView];
+    
+    NSLog(@"%ld", (long)self.selectedImageIndex);
+     
 }
 
 
